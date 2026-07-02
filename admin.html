@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>管理后台｜爪味自然</title>
+    <meta name="description" content="爪味自然宠物零食静态演示管理后台。" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="admin-page">
+    <header class="site-header" id="top">
+      <a class="brand" href="index.html" aria-label="返回爪味自然首页">
+        <span class="brand-mark">爪</span>
+        <span>爪味自然</span>
+      </a>
+      <nav class="main-nav" aria-label="后台导航">
+        <a href="#overview">经营概览</a>
+        <a href="#orders">订单列表</a>
+        <a href="#products">商品管理</a>
+      </nav>
+      <div class="header-actions">
+        <a class="account-link" href="index.html">返回前台</a>
+      </div>
+    </header>
+
+    <main class="admin-shell">
+      <section class="admin-hero" aria-labelledby="admin-title">
+        <div>
+          <p class="eyebrow">Management Console</p>
+          <h1 id="admin-title">宠物零食管理后台</h1>
+          <p>查看本地订单、营业额和商品表现，并上架新的演示商品。</p>
+        </div>
+        <div class="admin-hero-actions">
+          <a class="secondary-button" href="index.html#products">查看前台商品</a>
+        </div>
+      </section>
+
+      <section class="admin-section" id="overview" aria-labelledby="overview-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Overview</p>
+          <h2 id="overview-title">经营概览</h2>
+        </div>
+        <div class="admin-metrics" data-admin-metrics></div>
+      </section>
+
+      <section class="admin-section admin-grid-two" aria-label="销售分析">
+        <div>
+          <div class="section-heading compact">
+            <p class="eyebrow">Ranking</p>
+            <h2>商品销量排行</h2>
+          </div>
+          <div class="ranking-list" data-ranking-list></div>
+        </div>
+        <div>
+          <div class="section-heading compact">
+            <p class="eyebrow">Details</p>
+            <h2>商品销售明细</h2>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>商品</th>
+                  <th>分类</th>
+                  <th>售出</th>
+                  <th>销售额</th>
+                </tr>
+              </thead>
+              <tbody data-product-sales></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="admin-section" id="orders" aria-labelledby="orders-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Orders</p>
+          <h2 id="orders-title">订单列表</h2>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>订单号</th>
+                <th>下单时间</th>
+                <th>客户</th>
+                <th>收货地址</th>
+                <th>商品明细</th>
+                <th>金额</th>
+                <th>状态</th>
+              </tr>
+            </thead>
+            <tbody data-order-list></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="admin-section" id="products" aria-labelledby="product-form-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">New Product</p>
+          <h2 id="product-form-title">新品上架</h2>
+        </div>
+        <form class="admin-product-form" data-product-form>
+          <div class="form-grid">
+            <label>
+              商品名称
+              <input name="name" type="text" placeholder="例如 鸭肉南瓜小圆饼" required />
+            </label>
+            <label>
+              食品分类
+              <input name="category" type="text" placeholder="例如 鸭肉" required />
+            </label>
+            <label>
+              价格
+              <input name="price" type="number" min="1" step="1" placeholder="69" required />
+            </label>
+            <label>
+              规格
+              <input name="weight" type="text" placeholder="120g" required />
+            </label>
+            <label>
+              初始销量
+              <input name="sales" type="number" min="0" step="1" value="0" required />
+            </label>
+            <label>
+              商品图片
+              <select name="image" required>
+                <option value="assets/product-chicken-strips.png">鸡胸肉条图片</option>
+                <option value="assets/product-freeze-dried.png">冻干肉粒图片</option>
+                <option value="assets/product-dental-chews.png">洁齿棒图片</option>
+                <option value="assets/product-training-bites.png">训练小方图片</option>
+              </select>
+            </label>
+          </div>
+          <fieldset class="admin-fieldset">
+            <legend>适用宠物</legend>
+            <label class="check-option">
+              <input name="petTypes" type="checkbox" value="cat" checked />
+              猫猫
+            </label>
+            <label class="check-option">
+              <input name="petTypes" type="checkbox" value="dog" checked />
+              狗狗
+            </label>
+          </fieldset>
+          <div class="form-grid">
+            <label>
+              标签
+              <input name="tags" type="text" placeholder="用中文逗号分隔，例如 高蛋白，低脂" />
+            </label>
+            <label>
+              主要成分
+              <input name="ingredients" type="text" placeholder="鸭肉、南瓜、燕麦" required />
+            </label>
+          </div>
+          <label>
+            适用建议
+            <textarea name="suitability" placeholder="适合日常奖励、训练和外出安抚。" required></textarea>
+          </label>
+          <label>
+            适口性
+            <textarea name="palatability" placeholder="口感、香气和喂食场景。" required></textarea>
+          </label>
+          <label>
+            商品简介
+            <textarea name="description" placeholder="展示在前台商品卡片中的简短卖点。" required></textarea>
+          </label>
+          <div class="admin-form-actions">
+            <button class="primary-button" type="submit">上架商品</button>
+            <p class="auth-message" data-admin-message role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <script src="admin.js"></script>
+  </body>
+</html>
