@@ -4,6 +4,7 @@ const products = [
     name: "慢烘鸡胸肉条",
     category: "鸡肉",
     price: 59,
+    sales: 2680,
     weight: "120g",
     image: "assets/product-chicken-strips.png",
     tags: ["高蛋白", "低脂", "猫狗通用"],
@@ -17,6 +18,7 @@ const products = [
     name: "冻干双拼肉粒",
     category: "冻干",
     price: 76,
+    sales: 1846,
     weight: "95g",
     image: "assets/product-freeze-dried.png",
     tags: ["冻干", "挑食友好", "拌粮"],
@@ -30,6 +32,7 @@ const products = [
     name: "鼠尾草洁齿咀嚼棒",
     category: "洁齿",
     price: 68,
+    sales: 1265,
     weight: "7支装",
     image: "assets/product-dental-chews.png",
     tags: ["洁齿", "耐嚼", "清新口气"],
@@ -43,6 +46,7 @@ const products = [
     name: "一口训练小方",
     category: "训练奖励",
     price: 49,
+    sales: 3218,
     weight: "150g",
     image: "assets/product-training-bites.png",
     tags: ["小颗粒", "控量", "训练奖励"],
@@ -70,6 +74,7 @@ const state = {
 };
 
 const grid = document.querySelector("[data-product-grid]");
+const hotList = document.querySelector("[data-hot-list]");
 const cartDrawer = document.querySelector("[data-cart-drawer]");
 const cartItemsNode = document.querySelector("[data-cart-items]");
 const cartCountNodes = document.querySelectorAll("[data-cart-count]");
@@ -84,6 +89,10 @@ function formatCurrency(value) {
     currency: "CNY",
     maximumFractionDigits: 0
   }).format(value);
+}
+
+function formatSales(value) {
+  return new Intl.NumberFormat("zh-CN").format(value);
 }
 
 function loadCart() {
@@ -120,6 +129,30 @@ function showToast(message) {
   showToast.timer = window.setTimeout(() => toast.classList.remove("is-visible"), 2400);
 }
 
+function renderHotSales() {
+  if (!hotList) return;
+
+  hotList.innerHTML = [...products]
+    .sort((a, b) => b.sales - a.sales)
+    .slice(0, 3)
+    .map(
+      (product, index) => `
+        <li class="hot-item">
+          <span class="rank-badge">TOP ${index + 1}</span>
+          <div class="hot-copy">
+            <button class="hot-title" type="button" data-detail="${product.id}">${product.name}</button>
+            <span>${product.category} · ${formatSales(product.sales)} 件已售</span>
+          </div>
+          <div class="hot-action">
+            <strong>${formatCurrency(product.price)}</strong>
+            <button class="mini-button" type="button" data-add="${product.id}">加入</button>
+          </div>
+        </li>
+      `
+    )
+    .join("");
+}
+
 function renderProducts() {
   const visibleProducts =
     state.filter === "all" ? products : products.filter((product) => product.category === state.filter);
@@ -134,7 +167,10 @@ function renderProducts() {
               ${product.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
             </div>
             <div class="product-title">
-              <h3>${product.name}</h3>
+              <div class="product-name">
+                <h3>${product.name}</h3>
+                <span class="sales-count">已售 ${formatSales(product.sales)} 件</span>
+              </div>
               <span class="price">${formatCurrency(product.price)}</span>
             </div>
             <p class="product-desc">${product.description}</p>
@@ -240,6 +276,7 @@ function openProductModal(productId) {
         <div>
           <p class="eyebrow">${product.category} · ${product.weight}</p>
           <h2 id="modal-title">${product.name}</h2>
+          <p class="modal-sales">已售 ${formatSales(product.sales)} 件</p>
         </div>
         <p>${product.description}</p>
         <ul class="detail-list">
@@ -324,4 +361,5 @@ document.addEventListener("keydown", (event) => {
 });
 
 renderProducts();
+renderHotSales();
 renderCart();
