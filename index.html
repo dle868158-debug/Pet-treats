@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>爪味自然｜高端天然宠物零食</title>
+    <meta
+      name="description"
+      content="爪味自然提供猫狗通用的高端天然宠物零食，精选冻干、鸡肉、洁齿和训练奖励系列。"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <a class="brand" href="#top" aria-label="爪味自然首页">
+        <span class="brand-mark">爪</span>
+        <span>爪味自然</span>
+      </a>
+      <nav class="main-nav" aria-label="主导航">
+        <a href="#products">精选零食</a>
+        <a href="#standards">安心标准</a>
+        <a href="#journal">喂养灵感</a>
+      </nav>
+      <button class="icon-button cart-trigger" type="button" aria-label="打开购物车">
+        <span aria-hidden="true">🛒</span>
+        <span class="cart-count" data-cart-count>0</span>
+      </button>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">天然肉源 · 猫狗通用 · 小批量烘制</p>
+          <h1 id="hero-title">给每一次奖励，配得上的干净配方。</h1>
+          <p class="hero-text">
+            从冻干肉粒到洁齿咀嚼，爪味自然把真实食材、清晰成分和日常喂养场景放在第一位。
+          </p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#products">选购精选</a>
+            <button class="secondary-button cart-trigger" type="button">查看购物车</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="product-section" id="products" aria-labelledby="products-title">
+        <div class="section-heading">
+          <p class="eyebrow">本季精选</p>
+          <h2 id="products-title">按宠物习惯挑选天然零食</h2>
+          <p>训练奖励、日常加餐、洁齿咀嚼和挑食友好的冻干系列，一站式整理好。</p>
+        </div>
+
+        <div class="filter-bar" role="tablist" aria-label="商品类别筛选">
+          <button class="filter-chip is-active" type="button" data-filter="all" role="tab" aria-selected="true">
+            全部
+          </button>
+          <button class="filter-chip" type="button" data-filter="鸡肉" role="tab" aria-selected="false">鸡肉</button>
+          <button class="filter-chip" type="button" data-filter="冻干" role="tab" aria-selected="false">冻干</button>
+          <button class="filter-chip" type="button" data-filter="洁齿" role="tab" aria-selected="false">洁齿</button>
+          <button class="filter-chip" type="button" data-filter="训练奖励" role="tab" aria-selected="false">
+            训练奖励
+          </button>
+        </div>
+
+        <div class="product-grid" data-product-grid aria-live="polite"></div>
+      </section>
+
+      <section class="standards" id="standards" aria-labelledby="standards-title">
+        <div class="section-heading">
+          <p class="eyebrow">安心标准</p>
+          <h2 id="standards-title">看得懂的成分表，才配得上长期喂养。</h2>
+        </div>
+        <div class="standard-grid">
+          <article>
+            <span class="standard-icon">01</span>
+            <h3>真实肉源</h3>
+            <p>优先使用鸡胸肉、牛肉、鳕鱼和鸭肉等明确原料，不用含糊的肉类副产品描述。</p>
+          </article>
+          <article>
+            <span class="standard-icon">02</span>
+            <h3>轻加工</h3>
+            <p>低温烘制与冻干工艺保留香气和口感，让奖励更有吸引力，也更适合日常控制份量。</p>
+          </article>
+          <article>
+            <span class="standard-icon">03</span>
+            <h3>场景化选择</h3>
+            <p>按训练、洁齿、挑食、加餐等场景规划规格，减少宠物主人反复试错的成本。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="journal" id="journal" aria-labelledby="journal-title">
+        <div>
+          <p class="eyebrow">喂养灵感</p>
+          <h2 id="journal-title">零食不是主食，但可以成为更好的陪伴方式。</h2>
+        </div>
+        <p>
+          建议将零食热量控制在每日摄入的 10% 以内。第一次尝试新口味时，从少量开始，观察肠胃和皮肤状态。
+        </p>
+      </section>
+    </main>
+
+    <aside class="cart-drawer" data-cart-drawer aria-hidden="true" aria-label="购物车">
+      <div class="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+        <div class="cart-header">
+          <div>
+            <p class="eyebrow">购物车</p>
+            <h2 id="cart-title">已选零食</h2>
+          </div>
+          <button class="icon-button" type="button" data-close-cart aria-label="关闭购物车">×</button>
+        </div>
+        <div class="cart-items" data-cart-items></div>
+        <div class="cart-footer">
+          <div class="cart-total">
+            <span>合计</span>
+            <strong data-cart-total>¥0</strong>
+          </div>
+          <button class="primary-button full-width" type="button" data-checkout>提交订单</button>
+          <p class="checkout-note">当前为前端模拟下单，支付与订单后台待接入。</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="modal-backdrop" data-product-modal aria-hidden="true">
+      <article class="product-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button class="icon-button modal-close" type="button" data-close-modal aria-label="关闭商品详情">×</button>
+        <div class="modal-body" data-modal-body></div>
+      </article>
+    </div>
+
+    <div class="toast" data-toast role="status" aria-live="polite"></div>
+
+    <footer class="site-footer">
+      <p>© 2026 爪味自然 Paw Natural Treats</p>
+      <p>示例静态站点 · 商品与图片可替换为真实资料</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
