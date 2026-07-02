@@ -37,6 +37,9 @@ pnpm-debug.log*
 .env.*
 !.env.example
 
+# Vercel local project settings
+.vercel/
+
 # Local certificates and private keys
 *.pem
 *.key
