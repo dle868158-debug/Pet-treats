@@ -1,0 +1,13 @@
+{
+  "rewrites": [
+    { "source": "/api/orders/close", "destination": "/api/orders?action=close" },
+    { "source": "/api/orders/list", "destination": "/api/orders?action=list" },
+    { "source": "/api/payments/status", "destination": "/api/payments?action=status" },
+    { "source": "/api/payments/alipay/query", "destination": "/api/payments?provider=alipay&action=query" },
+    { "source": "/api/payments/wechat/query", "destination": "/api/payments?provider=wechat&action=query" },
+    { "source": "/api/payments/alipay", "destination": "/api/payments?provider=alipay&action=create" },
+    { "source": "/api/payments/wechat", "destination": "/api/payments?provider=wechat&action=create" },
+    { "source": "/api/webhooks/alipay", "destination": "/api/webhooks?provider=alipay" },
+    { "source": "/api/webhooks/wechat", "destination": "/api/webhooks?provider=wechat" }
+  ]
+}
