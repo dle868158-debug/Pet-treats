@@ -1,0 +1,26 @@
+{
+  "name": "pet-treats",
+  "version": "1.0.0",
+  "description": "一个面向高端天然宠物零食品牌的静态展示与前端购物车示例站点。页面以中文内容呈现，包含入口登录、游客浏览、商品筛选、热销榜、商品详情弹窗、购物车抽屉、账户中心、多地址管理和本地模拟下单流程。",
+  "main": "api/orders.js",
+  "scripts": {
+    "check": "node --check script.js && node --check admin.js && node --check auth.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dle868158-debug/Pet-treats.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/dle868158-debug/Pet-treats/issues"
+  },
+  "homepage": "https://github.com/dle868158-debug/Pet-treats#readme",
+  "dependencies": {
+    "@upstash/redis": "^1.38.0",
+    "alipay-sdk": "^4.14.0",
+    "qrcode": "^1.5.4"
+  }
+}

@@ -98,6 +98,7 @@ const USERS_KEY = "pawNaturalUsers";
 const SESSION_KEY = "pawNaturalSession";
 const GUEST_KEY = "pawNaturalGuest";
 const OPEN_CART_KEY = "pawNaturalOpenCart";
+const PAYMENT_PRODUCT_IDS = new Set(defaultProducts.map((product) => product.id));
 
 function loadStoredProducts() {
   try {
@@ -131,14 +132,25 @@ const FOOD_FILTERS = [...new Set([...BASE_FOOD_FILTERS, ...products.map((product
 
 const checkoutProvider = {
   async createCheckout(cartItems, customer, address) {
-    await new Promise((resolve) => window.setTimeout(resolve, 450));
-    const orderId = `ZN-${Date.now().toString().slice(-6)}`;
-    const order = createOrderRecord(cartItems, customer, address, orderId);
-    saveOrder(order);
+    const response = await fetch("/api/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        items: cartItems,
+        customer,
+        address
+      })
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || !result.ok) {
+      throw new Error(result.message || "订单创建失败，请稍后再试。");
+    }
     return {
       ok: true,
-      orderId,
-      ...order
+      orderId: result.order.id,
+      ...result.order
     };
   }
 };
@@ -170,8 +182,15 @@ const checkoutModal = document.querySelector("[data-checkout-modal]");
 const checkoutAddressPanel = document.querySelector("[data-checkout-address-panel]");
 const checkoutAddressForm = document.querySelector("[data-checkout-address-form]");
 const toggleCheckoutAddressButton = document.querySelector("[data-toggle-checkout-address]");
+const paymentModal = document.querySelector("[data-payment-modal]");
+const paymentSummary = document.querySelector("[data-payment-summary]");
+const paymentBody = document.querySelector("[data-payment-body]");
 const toast = document.querySelector("[data-toast]");
 let selectedCheckoutAddressId = null;
+let currentPaymentOrder = null;
+let currentPaymentProvider = "alipay";
+let currentPaymentPayload = null;
+let paymentPollTimer = null;
 
 function formatCurrency(value) {
   return new Intl.NumberFormat("zh-CN", {
@@ -315,6 +334,19 @@ function getCartTotal() {
     const product = getProduct(item.productId);
     return product ? sum + product.price * item.quantity : sum;
   }, 0);
+}
+
+function getUnsupportedPaymentProducts() {
+  return state.cart
+    .map((item) => getProduct(item.productId))
+    .filter((product) => product && !PAYMENT_PRODUCT_IDS.has(product.id));
+}
+
+function showUnsupportedPaymentMessage() {
+  const names = getUnsupportedPaymentProducts().map((product) => product.name);
+  if (!names.length) return false;
+  showToast(`该商品暂未上架到真实支付系统，请联系管理员：${names.join("、")}`);
+  return true;
 }
 
 function getAddresses() {
@@ -781,7 +813,177 @@ function closeCheckoutModal() {
   checkoutModal.setAttribute("aria-hidden", "true");
 }
 
+function isMobileClient() {
+  return /Android|iPhone|iPad|iPod|Mobile/i.test(window.navigator.userAgent);
+}
+
+function getPaymentChannel(provider) {
+  if (provider === "wechat") return isMobileClient() ? "h5" : "native";
+  return isMobileClient() ? "wap" : "pc";
+}
+
+function stopPaymentPolling() {
+  if (paymentPollTimer) {
+    window.clearInterval(paymentPollTimer);
+    paymentPollTimer = null;
+  }
+}
+
+function renderPaymentTabs() {
+  return `
+    <div class="payment-tabs" role="tablist" aria-label="支付方式">
+      <button class="payment-tab ${currentPaymentProvider === "alipay" ? "is-active" : ""}" type="button" data-payment-provider="alipay">支付宝</button>
+      <button class="payment-tab ${currentPaymentProvider === "wechat" ? "is-active" : ""}" type="button" data-payment-provider="wechat">微信支付</button>
+    </div>
+  `;
+}
+
+function renderPaymentPayload(payment) {
+  if (!payment) {
+    return '<div class="payment-box">正在创建支付请求...</div>';
+  }
+
+  if (payment.type === "html") {
+    return `
+      <div class="payment-box">
+        <p>已生成支付宝电脑网站支付表单，请在新窗口完成付款。</p>
+        <button class="primary-button" type="button" data-open-alipay>打开支付宝支付</button>
+      </div>
+    `;
+  }
+
+  if (payment.type === "redirect") {
+    return `
+      <div class="payment-box">
+        <p>移动端支付链接已生成，请继续跳转完成付款。</p>
+        <a class="primary-button" href="${payment.url}" target="_blank" rel="noopener">继续支付</a>
+      </div>
+    `;
+  }
+
+  if (payment.type === "qrcode") {
+    return `
+      <div class="payment-box">
+        <img class="payment-qrcode" src="${payment.qrCodeDataUrl}" alt="${payment.provider} 支付二维码">
+        <p>请使用${payment.provider === "wechat" ? "微信" : "支付宝"}扫码完成付款。</p>
+      </div>
+    `;
+  }
+
+  return '<div class="payment-box">支付请求已创建，请按页面提示完成付款。</div>';
+}
+
+function renderPaymentModal(statusText = "等待支付") {
+  if (!currentPaymentOrder) return;
+  paymentSummary.innerHTML = `
+    <strong>订单 ${currentPaymentOrder.id}</strong>
+    <span>${formatCurrency(Number(currentPaymentOrder.total) || 0)} · ${statusText}</span>
+  `;
+  paymentBody.innerHTML = `
+    ${renderPaymentTabs()}
+    ${renderPaymentPayload(currentPaymentPayload)}
+    <div class="payment-status">
+      <span>${statusText}</span>
+      <button class="plain-button" type="button" data-refresh-payment>重新生成支付</button>
+    </div>
+  `;
+}
+
+function openAlipayWindow() {
+  if (!currentPaymentPayload?.formHtml) return;
+  const paymentWindow = window.open("", "_blank", "noopener,noreferrer");
+  if (!paymentWindow) {
+    showToast("浏览器拦截了支付窗口，请允许弹窗后重试。");
+    return;
+  }
+  paymentWindow.document.open();
+  paymentWindow.document.write(currentPaymentPayload.formHtml);
+  paymentWindow.document.close();
+}
+
+async function pollPaymentStatus(orderId) {
+  const response = await fetch(`/api/payments/status?orderId=${encodeURIComponent(orderId)}`);
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok || !result.ok) return;
+
+  const status = result.order?.status || "PENDING_PAYMENT";
+  if (status === "PAID") {
+    stopPaymentPolling();
+    state.cart = [];
+    saveCart();
+    renderCart();
+    renderPaymentModal(`支付成功 · ${result.order.platformTradeNo || "已确认"}`);
+    showToast(`订单 ${orderId} 支付成功`);
+    return;
+  }
+
+  if (status === "CLOSED" || status === "FAILED") {
+    stopPaymentPolling();
+    renderPaymentModal(status === "CLOSED" ? "订单已关闭" : "支付失败，可重新支付");
+  }
+}
+
+function startPaymentPolling(orderId) {
+  stopPaymentPolling();
+  paymentPollTimer = window.setInterval(() => {
+    pollPaymentStatus(orderId);
+  }, 3000);
+  pollPaymentStatus(orderId);
+}
+
+async function requestPayment(provider = currentPaymentProvider) {
+  if (!currentPaymentOrder) return;
+  currentPaymentProvider = provider;
+  currentPaymentPayload = null;
+  renderPaymentModal("正在创建支付请求");
+
+  try {
+    const response = await fetch(`/api/payments/${provider}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        orderId: currentPaymentOrder.id,
+        channel: getPaymentChannel(provider)
+      })
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || !result.ok) {
+      throw new Error(result.message || "支付请求创建失败，请稍后再试。");
+    }
+    currentPaymentPayload = result.payment;
+    renderPaymentModal("等待支付");
+    if (currentPaymentPayload?.type === "html") openAlipayWindow();
+    if (currentPaymentPayload?.type === "redirect" && isMobileClient()) {
+      window.location.href = currentPaymentPayload.url;
+    }
+  } catch (error) {
+    renderPaymentModal(error.message);
+    showToast(error.message);
+  }
+}
+
+function openPaymentModal(order) {
+  currentPaymentOrder = order;
+  currentPaymentProvider = "alipay";
+  currentPaymentPayload = null;
+  paymentModal.classList.add("is-open");
+  paymentModal.setAttribute("aria-hidden", "false");
+  renderPaymentModal("等待选择支付方式");
+  requestPayment("alipay");
+  startPaymentPolling(order.id);
+}
+
+function closePaymentModal() {
+  stopPaymentPolling();
+  paymentModal.classList.remove("is-open");
+  paymentModal.setAttribute("aria-hidden", "true");
+}
+
 async function confirmCheckout() {
+  if (showUnsupportedPaymentMessage()) return;
+
   const selectedAddress = getSelectedCheckoutAddress();
   if (!selectedAddress) {
     showToast("请先新增或选择收货地址");
@@ -789,14 +991,16 @@ async function confirmCheckout() {
     return;
   }
 
-  const result = await checkoutProvider.createCheckout([...state.cart], state.currentUser, selectedAddress);
-  if (result.ok) {
-    state.cart = [];
-    saveCart();
-    renderCart();
-    closeCheckoutModal();
-    closeCart();
-    showToast(`订单 ${result.orderId} 已提交，购买成功`);
+  try {
+    const result = await checkoutProvider.createCheckout([...state.cart], state.currentUser, selectedAddress);
+    if (result.ok) {
+      closeCheckoutModal();
+      closeCart();
+      openPaymentModal(result);
+      showToast(`订单 ${result.orderId} 已创建，请完成支付`);
+    }
+  } catch (error) {
+    showToast(error.message || "订单创建失败，请稍后再试。");
   }
 }
 
@@ -805,6 +1009,8 @@ function checkout() {
     showToast("购物车为空，先选择一款零食吧");
     return;
   }
+
+  if (showUnsupportedPaymentMessage()) return;
 
   if (!state.currentUser) {
     localStorage.setItem(OPEN_CART_KEY, "true");
@@ -827,6 +1033,7 @@ document.addEventListener("click", (event) => {
   const removeId = target.dataset.remove;
   const petFilter = target.dataset.petFilter;
   const foodFilter = target.dataset.foodFilter;
+  const paymentProvider = target.dataset.paymentProvider;
   const checkoutAddressId = target.dataset.defaultCheckoutAddress;
   const defaultAddressId = target.dataset.setDefault;
   const deleteAddressId = target.dataset.deleteAddress;
@@ -846,6 +1053,13 @@ document.addEventListener("click", (event) => {
   }
   if (target.matches("[data-close-account]")) closeAccountModal();
   if (target.matches("[data-close-checkout]")) closeCheckoutModal();
+  if (target.matches("[data-close-payment]")) closePaymentModal();
+  if (target.matches("[data-open-alipay]")) openAlipayWindow();
+  if (target.matches("[data-refresh-payment]")) requestPayment(currentPaymentProvider);
+  if (paymentProvider) {
+    requestPayment(paymentProvider);
+    return;
+  }
   if (target.matches("[data-toggle-checkout-address]")) {
     setCheckoutAddressFormVisible(checkoutAddressForm.hidden);
     return;
@@ -903,12 +1117,17 @@ checkoutModal.addEventListener("click", (event) => {
   if (event.target === checkoutModal) closeCheckoutModal();
 });
 
+paymentModal.addEventListener("click", (event) => {
+  if (event.target === paymentModal) closePaymentModal();
+});
+
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     closeCart();
     closeProductModal();
     closeAccountModal();
     closeCheckoutModal();
+    closePaymentModal();
   }
 });
 

@@ -139,6 +139,7 @@ const productSalesNode = document.querySelector("[data-product-sales]");
 const orderListNode = document.querySelector("[data-order-list]");
 const productForm = document.querySelector("[data-product-form]");
 const adminMessage = document.querySelector("[data-admin-message]");
+let realPaymentOrders = [];
 
 function formatCurrency(value) {
   return new Intl.NumberFormat("zh-CN", {
@@ -202,7 +203,9 @@ function getProducts() {
 }
 
 function getOrders() {
-  return [...loadCollection(ORDERS_KEY), ...demoOrders].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  return [...realPaymentOrders, ...loadCollection(ORDERS_KEY), ...demoOrders].sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
 }
 
 function getProductMap(products) {
@@ -304,18 +307,28 @@ function renderProductSales(salesSummaries) {
     .join("");
 }
 
+function formatOrderStatus(status) {
+  const statusMap = {
+    PENDING_PAYMENT: "待支付",
+    PAID: "已支付",
+    CLOSED: "已关闭",
+    FAILED: "支付失败"
+  };
+  return statusMap[status] || status || "待配送";
+}
+
 function renderOrders(orders) {
   orderListNode.innerHTML = orders
     .map(
       (order) => `
         <tr>
-          <td><strong>${escapeHtml(order.id)}</strong></td>
+          <td><strong>${escapeHtml(order.id)}</strong>${order.source === "real" ? '<br><span class="source-badge">真实支付</span>' : ""}</td>
           <td>${formatDate(order.createdAt)}</td>
           <td>${escapeHtml(order.customer?.name || "演示用户")}<br><span>${escapeHtml(order.customer?.email || "")}</span></td>
           <td>${escapeHtml(order.address?.receiver || "")} ${escapeHtml(order.address?.phone || "")}<br><span>${escapeHtml(order.address?.region || "")} ${escapeHtml(order.address?.detail || "")}</span></td>
           <td>${order.items.map((item) => `${escapeHtml(item.name)} x ${formatNumber(item.quantity)}`).join("<br>")}</td>
           <td>${formatCurrency(order.total)}</td>
-          <td><span class="status-badge">${escapeHtml(order.status || "待配送")}</span></td>
+          <td><span class="status-badge">${escapeHtml(formatOrderStatus(order.status))}</span></td>
         </tr>
       `
     )
@@ -391,6 +404,49 @@ function showMessage(message, type = "info") {
   adminMessage.dataset.type = type;
 }
 
+async function loadRealPaymentOrders(token) {
+  const response = await fetch("/api/orders/list", {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok || !result.ok) {
+    throw new Error(result.message || "真实订单读取失败。");
+  }
+  realPaymentOrders = result.orders || [];
+  renderDashboard();
+  showMessage(`已加载 ${formatNumber(realPaymentOrders.length)} 条真实支付订单。`, "success");
+}
+
+function setupRealOrderLoader() {
+  const actions = document.querySelector(".admin-hero-actions");
+  if (actions) {
+    const button = document.createElement("button");
+    button.className = "plain-button";
+    button.type = "button";
+    button.textContent = "加载真实订单";
+    button.addEventListener("click", async () => {
+      const token = window.prompt("请输入后台订单 token");
+      if (!token) return;
+      sessionStorage.setItem("pawNaturalAdminToken", token);
+      try {
+        await loadRealPaymentOrders(token);
+      } catch (error) {
+        showMessage(error.message, "error");
+      }
+    });
+    actions.appendChild(button);
+  }
+
+  const savedToken = sessionStorage.getItem("pawNaturalAdminToken");
+  if (savedToken) {
+    loadRealPaymentOrders(savedToken).catch(() => {
+      sessionStorage.removeItem("pawNaturalAdminToken");
+    });
+  }
+}
+
 productForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const product = getProductFromForm(productForm);
@@ -412,4 +468,5 @@ productForm.addEventListener("submit", (event) => {
   renderDashboard();
 });
 
+setupRealOrderLoader();
 renderDashboard();

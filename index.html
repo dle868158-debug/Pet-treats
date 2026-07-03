@@ -325,6 +325,20 @@
       </article>
     </div>
 
+    <div class="modal-backdrop" data-payment-modal aria-hidden="true">
+      <article class="payment-modal" role="dialog" aria-modal="true" aria-labelledby="payment-title">
+        <div class="account-header">
+          <div>
+            <p class="eyebrow">安全支付</p>
+            <h2 id="payment-title">选择支付方式</h2>
+          </div>
+          <button class="icon-button" type="button" data-close-payment aria-label="关闭支付">×</button>
+        </div>
+        <div class="payment-summary" data-payment-summary></div>
+        <div class="payment-body" data-payment-body></div>
+      </article>
+    </div>
+
     <div class="toast" data-toast role="status" aria-live="polite"></div>
 
     <footer class="site-footer">
