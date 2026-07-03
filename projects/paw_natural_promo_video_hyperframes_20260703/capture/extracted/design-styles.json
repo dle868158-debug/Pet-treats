@@ -1,0 +1,170 @@
+{
+  "typography": [
+    {
+      "role": "display",
+      "fontFamily": "Inter",
+      "fontSize": "92px",
+      "fontWeight": "700",
+      "lineHeight": "103.04px",
+      "letterSpacing": "normal",
+      "color": "#17201D",
+      "sampleText": "岚禾小食"
+    },
+    {
+      "role": "heading",
+      "fontFamily": "Inter",
+      "fontSize": "40px",
+      "fontWeight": "700",
+      "lineHeight": "44.8px",
+      "letterSpacing": "normal",
+      "color": "#17201D",
+      "sampleText": "进入岚禾小食"
+    },
+    {
+      "role": "body",
+      "fontFamily": "Inter",
+      "fontSize": "18px",
+      "fontWeight": "400",
+      "lineHeight": "28.8px",
+      "letterSpacing": "normal",
+      "color": "#38443E",
+      "sampleText": "先登录账户，或以游客身份浏览精选宠物零食。"
+    },
+    {
+      "role": "label",
+      "fontFamily": "Inter",
+      "fontSize": "13px",
+      "fontWeight": "900",
+      "lineHeight": "20.8px",
+      "letterSpacing": "normal",
+      "color": "#3E5C49",
+      "sampleText": "邮箱"
+    }
+  ],
+  "spacing": {
+    "observed": [
+      1,
+      6,
+      10,
+      24,
+      26
+    ],
+    "baseUnit": 8
+  },
+  "radius": [
+    "8px",
+    "999px"
+  ],
+  "shadows": [
+    {
+      "value": "rgba(62, 92, 73, 0.24) 0px 18px 36px 0px",
+      "count": 1
+    }
+  ],
+  "buttons": [
+    {
+      "label": "登录",
+      "background": "#3E5C49",
+      "color": "#FFFFFF",
+      "padding": "1px 6px",
+      "borderRadius": "8px",
+      "border": "1px solid rgb(62, 92, 73)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "900",
+      "height": "52px"
+    },
+    {
+      "label": "注册",
+      "background": "#FFFFFF",
+      "color": "#3E5C49",
+      "padding": "1px 6px",
+      "borderRadius": "8px",
+      "border": "1px solid rgba(23, 32, 29, 0.12)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "900",
+      "height": "52px"
+    },
+    {
+      "label": "登录并进入",
+      "background": "#3E5C49",
+      "color": "#FFFFFF",
+      "padding": "0px 24px",
+      "borderRadius": "999px",
+      "border": "0px none rgb(255, 255, 255)",
+      "boxShadow": "rgba(62, 92, 73, 0.24) 0px 18px 36px 0px",
+      "fontSize": "16px",
+      "fontWeight": "800",
+      "height": "46px"
+    },
+    {
+      "label": "游客进入",
+      "background": "#FFFFFF",
+      "color": "#3E5C49",
+      "padding": "1px 6px",
+      "borderRadius": "999px",
+      "border": "1px solid rgba(62, 92, 73, 0.22)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "900",
+      "height": "46px"
+    }
+  ],
+  "cards": [
+    {
+      "label": "card",
+      "background": "transparent",
+      "color": "#17201D",
+      "padding": "0px",
+      "borderRadius": "0px",
+      "border": "0px none rgb(23, 32, 29)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "130.766px"
+    }
+  ],
+  "nav": null,
+  "chips": [
+    {
+      "label": "LH",
+      "background": "#EDF4EA",
+      "color": "#3E5C49",
+      "padding": "0px",
+      "borderRadius": "50%",
+      "border": "1px solid rgba(62, 92, 73, 0.28)",
+      "boxShadow": "none",
+      "fontSize": "13px",
+      "fontWeight": "800",
+      "height": "42px"
+    }
+  ],
+  "statCells": [],
+  "tabs": [
+    {
+      "label": "登录",
+      "background": "#3E5C49",
+      "color": "#FFFFFF",
+      "padding": "1px 6px",
+      "borderRadius": "8px",
+      "border": "1px solid rgb(62, 92, 73)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "900",
+      "height": "52px"
+    },
+    {
+      "label": "注册",
+      "background": "#FFFFFF",
+      "color": "#3E5C49",
+      "padding": "1px 6px",
+      "borderRadius": "8px",
+      "border": "1px solid rgba(23, 32, 29, 0.12)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "900",
+      "height": "52px"
+    }
+  ]
+}

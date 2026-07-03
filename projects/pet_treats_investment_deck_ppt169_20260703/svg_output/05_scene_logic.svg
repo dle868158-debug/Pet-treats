@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <rect width="1280" height="720" fill="#F6F8F3"/>
+  <text x="640" y="76" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="44" font-weight="800" fill="#1E2A25">消费场景不是“买零食”，而是四种日常关系</text>
+  <text x="640" y="114" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#5F6E65">渠道招商时，用场景帮助合作方判断谁来买、为什么买、如何复购</text>
+  <circle cx="640" cy="378" r="104" fill="#2F5D50"/>
+  <circle cx="640" cy="378" r="82" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-opacity="0.45"/>
+  <use data-icon="tabler-filled/paw" x="608" y="318" width="64" height="64" fill="#FFFFFF"/>
+  <text x="640" y="414" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="29" font-weight="800" fill="#FFFFFF">宠物家庭</text>
+  <text x="640" y="446" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="18" fill="#FFFFFF">复购关系入口</text>
+  <line x1="566" y1="304" x2="320" y2="198" stroke="#8EB69B" stroke-width="3" stroke-linecap="round"/>
+  <line x1="714" y1="304" x2="960" y2="198" stroke="#8EB69B" stroke-width="3" stroke-linecap="round"/>
+  <line x1="566" y1="452" x2="320" y2="558" stroke="#8EB69B" stroke-width="3" stroke-linecap="round"/>
+  <line x1="714" y1="452" x2="960" y2="558" stroke="#8EB69B" stroke-width="3" stroke-linecap="round"/>
+  <rect x="120" y="154" width="340" height="130" rx="18" fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5"/>
+  <use data-icon="tabler-filled/bone" x="152" y="188" width="34" height="34" fill="#2F5D50"/>
+  <text x="204" y="208" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="26" font-weight="800" fill="#1E2A25">日常奖励</text>
+  <text x="204" y="246" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">高频小额，适合门店常备陈列</text>
+  <rect x="820" y="154" width="340" height="130" rx="18" fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5"/>
+  <use data-icon="tabler-filled/fish-bone" x="852" y="188" width="34" height="34" fill="#2F5D50"/>
+  <text x="904" y="208" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="26" font-weight="800" fill="#1E2A25">营养加餐</text>
+  <text x="904" y="246" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">和主粮、罐头形成搭配销售</text>
+  <rect x="120" y="498" width="340" height="130" rx="18" fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5"/>
+  <use data-icon="tabler-filled/shield-check" x="152" y="532" width="34" height="34" fill="#D6A756"/>
+  <text x="204" y="552" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="26" font-weight="800" fill="#1E2A25">口腔护理</text>
+  <text x="204" y="590" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">把“功能型零食”转为周期复购</text>
+  <rect x="820" y="498" width="340" height="130" rx="18" fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5"/>
+  <use data-icon="tabler-filled/tags" x="852" y="532" width="34" height="34" fill="#D6A756"/>
+  <text x="904" y="552" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="26" font-weight="800" fill="#1E2A25">训练互动</text>
+  <text x="904" y="590" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">适合社群打卡、训练课和活动</text>
+  <text x="60" y="674" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#8A968E">Source: 商品分类、标签和适用文案重构</text>
+  <text x="1220" y="674" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#8A968E" text-anchor="end">05</text>
+</svg>

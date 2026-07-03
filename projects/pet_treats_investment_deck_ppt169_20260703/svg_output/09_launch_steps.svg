@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <rect width="1280" height="720" fill="#F6F8F3"/>
+  <text x="640" y="80" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="46" font-weight="800" fill="#1E2A25">合作启动可以压缩为选品、陈列、复盘三步</text>
+  <text x="640" y="120" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#5F6E65">让合作方在短周期里看到产品动销和内容转化，而不是长期等待大系统上线</text>
+  <line x1="260" y1="255" x2="1020" y2="255" stroke="#8EB69B" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="1020,244 1046,255 1020,266" fill="#8EB69B"/>
+  <circle cx="260" cy="255" r="54" fill="#2F5D50"/>
+  <text x="260" y="271" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="44" font-weight="800" fill="#FFFFFF">01</text>
+  <circle cx="640" cy="255" r="54" fill="#D6A756"/>
+  <text x="640" y="271" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="44" font-weight="800" fill="#FFFFFF">02</text>
+  <circle cx="1020" cy="255" r="54" fill="#2F5D50"/>
+  <text x="1020" y="271" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="44" font-weight="800" fill="#FFFFFF">03</text>
+  <rect x="110" y="354" width="300" height="222" rx="18" fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5"/>
+  <text x="150" y="404" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="30" font-weight="800" fill="#1E2A25">选品</text>
+  <text x="150" y="452" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="22" fill="#5F6E65">基于渠道定位选择</text>
+  <text x="150" y="486" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="22" fill="#5F6E65">2 到 4 个主推 SKU</text>
+  <rect x="150" y="524" width="132" height="34" rx="17" fill="#EEF4EC"/>
+  <text x="216" y="547" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="18" font-weight="700" fill="#2F5D50">输出货盘</text>
+  <rect x="490" y="354" width="300" height="222" rx="18" fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5"/>
+  <text x="530" y="404" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="30" font-weight="800" fill="#1E2A25">陈列</text>
+  <text x="530" y="452" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="22" fill="#5F6E65">按“奖励、加餐、护理”</text>
+  <text x="530" y="486" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="22" fill="#5F6E65">组织货架和内容话术</text>
+  <rect x="530" y="524" width="132" height="34" rx="17" fill="#EEF4EC"/>
+  <text x="596" y="547" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="18" font-weight="700" fill="#D6A756">输出样板</text>
+  <rect x="870" y="354" width="300" height="222" rx="18" fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5"/>
+  <text x="910" y="404" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="30" font-weight="800" fill="#1E2A25">复盘</text>
+  <text x="910" y="452" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="22" fill="#5F6E65">用订单、销量、营业额</text>
+  <text x="910" y="486" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="22" fill="#5F6E65">判断补货和加推节奏</text>
+  <rect x="910" y="524" width="132" height="34" rx="17" fill="#EEF4EC"/>
+  <text x="976" y="547" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="18" font-weight="700" fill="#2F5D50">输出看板</text>
+  <text x="60" y="674" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#8A968E">Source: 后台新品上架、订单列表与统计卡片</text>
+  <text x="1220" y="674" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#8A968E" text-anchor="end">09</text>
+</svg>

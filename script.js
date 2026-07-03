@@ -129,10 +129,6 @@ function getMergedProducts() {
 const products = getMergedProducts();
 const FOOD_FILTERS = [...new Set([...BASE_FOOD_FILTERS, ...products.map((product) => product.category).filter(Boolean)])];
 
-if (!localStorage.getItem(SESSION_KEY) && localStorage.getItem(GUEST_KEY) !== "true") {
-  window.location.replace("auth.html?return=home");
-}
-
 const checkoutProvider = {
   async createCheckout(cartItems, customer, address) {
     await new Promise((resolve) => window.setTimeout(resolve, 450));

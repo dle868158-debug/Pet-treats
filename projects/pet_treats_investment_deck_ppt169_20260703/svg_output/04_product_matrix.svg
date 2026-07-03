@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <rect width="1280" height="720" fill="#F6F8F3"/>
+  <text x="60" y="82" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="44" font-weight="800" fill="#1E2A25">四类零食覆盖门店最常见的购买场景</text>
+  <text x="60" y="120" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#5F6E65">用有限 SKU 讲清“日常奖励、营养加餐、口腔护理、训练互动”四个入口</text>
+  <rect x="60" y="166" width="270" height="420" rx="18" fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5"/>
+  <image href="../images/product-chicken-strips.png" x="88" y="192" width="214" height="154" preserveAspectRatio="xMidYMid meet"/>
+  <use data-icon="tabler-filled/bone" x="94" y="370" width="32" height="32" fill="#2F5D50"/>
+  <text x="140" y="396" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="27" font-weight="800" fill="#1E2A25">鸡肉条</text>
+  <text x="94" y="436" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#5F6E65">主打日常奖励</text>
+  <text x="94" y="470" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#5F6E65">高接受度，适合首推</text>
+  <rect x="94" y="516" width="118" height="34" rx="17" fill="#EEF4EC"/>
+  <text x="153" y="539" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="18" font-weight="700" fill="#2F5D50">门店常备</text>
+  <rect x="360" y="166" width="270" height="420" rx="18" fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5"/>
+  <image href="../images/product-freeze-dried.png" x="388" y="192" width="214" height="154" preserveAspectRatio="xMidYMid meet"/>
+  <use data-icon="tabler-filled/fish-bone" x="394" y="370" width="32" height="32" fill="#2F5D50"/>
+  <text x="440" y="396" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="27" font-weight="800" fill="#1E2A25">冻干粒</text>
+  <text x="394" y="436" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#5F6E65">主打营养加餐</text>
+  <text x="394" y="470" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#5F6E65">适合搭配主粮销售</text>
+  <rect x="394" y="516" width="118" height="34" rx="17" fill="#EEF4EC"/>
+  <text x="453" y="539" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="18" font-weight="700" fill="#2F5D50">加购搭配</text>
+  <rect x="660" y="166" width="270" height="420" rx="18" fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5"/>
+  <image href="../images/product-dental-chews.png" x="688" y="192" width="214" height="154" preserveAspectRatio="xMidYMid meet"/>
+  <use data-icon="tabler-filled/shield-check" x="694" y="370" width="32" height="32" fill="#D6A756"/>
+  <text x="740" y="396" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="27" font-weight="800" fill="#1E2A25">洁齿棒</text>
+  <text x="694" y="436" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#5F6E65">主打口腔护理</text>
+  <text x="694" y="470" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#5F6E65">形成周期性复购</text>
+  <rect x="694" y="516" width="118" height="34" rx="17" fill="#EEF4EC"/>
+  <text x="753" y="539" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="18" font-weight="700" fill="#D6A756">复购入口</text>
+  <rect x="960" y="166" width="270" height="420" rx="18" fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5"/>
+  <image href="../images/product-training-bites.png" x="988" y="192" width="214" height="154" preserveAspectRatio="xMidYMid meet"/>
+  <use data-icon="tabler-filled/tags" x="994" y="370" width="32" height="32" fill="#D6A756"/>
+  <text x="1040" y="396" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="27" font-weight="800" fill="#1E2A25">训练粒</text>
+  <text x="994" y="436" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#5F6E65">主打训练互动</text>
+  <text x="994" y="470" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#5F6E65">适合课程和社群</text>
+  <rect x="994" y="516" width="118" height="34" rx="17" fill="#EEF4EC"/>
+  <text x="1053" y="539" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="18" font-weight="700" fill="#D6A756">互动转化</text>
+  <text x="60" y="674" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#8A968E">Source: 本地商品图片与商品分类字段</text>
+  <text x="1220" y="674" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#8A968E" text-anchor="end">04</text>
+</svg>

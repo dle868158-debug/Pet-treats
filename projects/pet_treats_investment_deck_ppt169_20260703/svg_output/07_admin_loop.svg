@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <rect width="1280" height="720" fill="#F6F8F3"/>
+  <text x="60" y="78" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="43" font-weight="800" fill="#1E2A25">管理后台把招商演示从“产品展示”推进到“经营展示”</text>
+  <text x="60" y="116" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#5F6E65">前台订单和后台新品统一进入本地数据层，形成可复盘的演示沙盘</text>
+  <rect x="76" y="166" width="760" height="108" rx="18" fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5"/>
+  <rect x="96" y="186" width="74" height="68" rx="14" fill="#EEF4EC"/>
+  <use data-icon="tabler-filled/shopping-cart" x="115" y="202" width="36" height="36" fill="#2F5D50"/>
+  <text x="198" y="214" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="26" font-weight="800" fill="#1E2A25">前台交易层</text>
+  <text x="198" y="248" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">商品浏览、购物车、地址确认、下单成功提示订单号</text>
+  <rect x="76" y="306" width="760" height="108" rx="18" fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5"/>
+  <rect x="96" y="326" width="74" height="68" rx="14" fill="#EEF4EC"/>
+  <use data-icon="tabler-filled/list-check" x="115" y="342" width="36" height="36" fill="#D6A756"/>
+  <text x="198" y="354" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="26" font-weight="800" fill="#1E2A25">本地数据层</text>
+  <text x="198" y="388" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">pawNaturalOrders 保存真实订单，pawNaturalProducts 保存后台新品</text>
+  <rect x="76" y="446" width="760" height="108" rx="18" fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5"/>
+  <rect x="96" y="466" width="74" height="68" rx="14" fill="#EEF4EC"/>
+  <use data-icon="tabler-filled/dashboard" x="115" y="482" width="36" height="36" fill="#2F5D50"/>
+  <text x="198" y="494" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="26" font-weight="800" fill="#1E2A25">后台经营层</text>
+  <text x="198" y="528" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">订单列表、营业额、订单数、售出件数、销量排行、新品上架</text>
+  <rect x="884" y="164" width="320" height="392" rx="22" fill="#2F5D50"/>
+  <text x="922" y="210" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="26" font-weight="800" fill="#FFFFFF">后台看板快照</text>
+  <rect x="922" y="244" width="106" height="82" rx="12" fill="#FFFFFF" fill-opacity="0.15"/>
+  <text x="944" y="274" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#FFFFFF">营业额</text>
+  <text x="944" y="306" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="25" font-weight="800" fill="#FFFFFF">¥12k</text>
+  <rect x="1058" y="244" width="106" height="82" rx="12" fill="#FFFFFF" fill-opacity="0.15"/>
+  <text x="1080" y="274" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="16" fill="#FFFFFF">订单数</text>
+  <text x="1080" y="306" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="25" font-weight="800" fill="#FFFFFF">86</text>
+  <rect x="922" y="356" width="242" height="140" rx="14" fill="#FFFFFF"/>
+  <text x="948" y="390" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="20" font-weight="800" fill="#1E2A25">销量排行</text>
+  <rect x="948" y="412" width="170" height="12" rx="6" fill="#8EB69B"/>
+  <rect x="948" y="442" width="134" height="12" rx="6" fill="#D6A756"/>
+  <rect x="948" y="472" width="98" height="12" rx="6" fill="#8EB69B"/>
+  <text x="60" y="674" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#8A968E">Source: admin.html、admin.js 与本地订单/商品接口</text>
+  <text x="1220" y="674" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#8A968E" text-anchor="end">07</text>
+</svg>

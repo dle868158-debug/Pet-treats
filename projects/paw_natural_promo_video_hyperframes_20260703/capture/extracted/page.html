@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+
+</head>
+<body>
+
+    <main class="auth-gate" aria-labelledby="auth-title">
+      <section class="auth-preview" aria-hidden="true">
+        <div class="auth-preview-copy">
+          <span class="brand-mark">LH</span>
+          <p class="eyebrow">Natural Pet Treats</p>
+          <h1>岚禾小食</h1>
+          <p>先登录账户，或以游客身份浏览精选宠物零食。</p>
+        </div>
+      </section>
+
+      <section class="auth-shell auth-floating" aria-label="登录注册">
+        <div class="auth-card-heading">
+          <p class="eyebrow">Member Access</p>
+          <h2 id="auth-title">进入岚禾小食</h2>
+          <p>登录后可以管理多个收货地址；游客可以浏览和加购，购买前需要登录。</p>
+        </div>
+
+        <div class="auth-tabs" role="tablist" aria-label="账户操作">
+          <button class="auth-tab is-active" type="button" data-auth-tab="login" role="tab" aria-selected="true">
+            登录
+          </button>
+          <button class="auth-tab" type="button" data-auth-tab="register" role="tab" aria-selected="false">
+            注册
+          </button>
+        </div>
+
+        <form class="auth-panel is-active" data-auth-panel="login" data-login-form="">
+          <label>
+            <span>邮箱</span>
+            <input type="email" name="email" autocomplete="email" placeholder="请输入注册邮箱" required="">
+          </label>
+          <label>
+            <span>密码</span>
+            <input type="password" name="password" autocomplete="current-password" placeholder="请输入密码" required="">
+          </label>
+          <button class="primary-button" type="submit">登录并进入</button>
+        </form>
+
+        <form class="auth-panel" data-auth-panel="register" data-register-form="">
+          <label>
+            <span>姓名</span>
+            <input type="text" name="name" autocomplete="name" placeholder="请输入姓名" required="">
+          </label>
+          <label>
+            <span>邮箱</span>
+            <input type="email" name="email" autocomplete="email" placeholder="请输入邮箱" required="">
+          </label>
+          <label>
+            <span>密码</span>
+            <input type="password" name="password" autocomplete="new-password" placeholder="至少 6 位" required="">
+          </label>
+          <label>
+            <span>确认密码</span>
+            <input type="password" name="confirmPassword" autocomplete="new-password" placeholder="再次输入密码" required="">
+          </label>
+          <button class="primary-button" type="submit">注册并进入</button>
+        </form>
+
+        <button class="guest-button" type="button" data-guest-entry="">游客进入</button>
+      </section>
+    </main>
+
+    <div class="toast" data-toast="" role="status" aria-live="polite"></div>
+    <script src="auth.js"></script>
+
+
+
+</body>
+</html>

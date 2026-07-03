@@ -1,0 +1,28 @@
+{
+  "schema": "ppt-master.source_to_md.profile.v1",
+  "converter": "web_to_md.py",
+  "conversion_type": "web",
+  "source": {
+    "path": "https://vink567.github.io/Pet-treats/index.html#top",
+    "name": "https://vink567.github.io/Pet-treats/index.html#top",
+    "suffix": "",
+    "kind": "url",
+    "exists": false,
+    "size_bytes": null
+  },
+  "outputs": {
+    "markdown": "岚禾小食_天然宠物零食.md",
+    "asset_dir": "岚禾小食_天然宠物零食_files",
+    "image_manifest": "",
+    "image_count": 0
+  },
+  "markdown": {
+    "line_count": 56,
+    "char_count": 676,
+    "heading_count": 8,
+    "table_count": 0,
+    "image_ref_count": 1,
+    "link_count": 1
+  },
+  "warnings": []
+}

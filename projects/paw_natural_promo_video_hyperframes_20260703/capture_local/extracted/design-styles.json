@@ -1,0 +1,152 @@
+{
+  "typography": [
+    {
+      "role": "display",
+      "fontFamily": "Microsoft YaHei",
+      "fontSize": "42px",
+      "fontWeight": "700",
+      "lineHeight": "42.84px",
+      "letterSpacing": "normal",
+      "color": "#222926",
+      "sampleText": "登录后保存地址，游客也可以先逛逛。"
+    },
+    {
+      "role": "body",
+      "fontFamily": "Microsoft YaHei",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "25.6px",
+      "letterSpacing": "normal",
+      "color": "#69716B",
+      "sampleText": "游客可以浏览和加购商品，但提交订单和管理收货地址需要登录账号。"
+    }
+  ],
+  "spacing": {
+    "observed": [
+      1,
+      4,
+      6,
+      8,
+      10,
+      12,
+      18,
+      24
+    ],
+    "baseUnit": 4
+  },
+  "radius": [
+    "8px",
+    "999px"
+  ],
+  "shadows": [
+    {
+      "value": "rgba(63, 89, 74, 0.22) 0px 14px 30px 0px",
+      "count": 1
+    }
+  ],
+  "buttons": [
+    {
+      "label": "登录",
+      "background": "#3F594A",
+      "color": "#FFFDF7",
+      "padding": "1px 6px",
+      "borderRadius": "999px",
+      "border": "0px none rgb(255, 253, 247)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "900",
+      "height": "36px"
+    },
+    {
+      "label": "注册",
+      "background": "transparent",
+      "color": "#69716B",
+      "padding": "1px 6px",
+      "borderRadius": "999px",
+      "border": "0px none rgb(105, 113, 107)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "900",
+      "height": "36px"
+    },
+    {
+      "label": "登录",
+      "background": "#3F594A",
+      "color": "#FFFDF7",
+      "padding": "0px 22px",
+      "borderRadius": "8px",
+      "border": "1px solid rgb(63, 89, 74)",
+      "boxShadow": "rgba(63, 89, 74, 0.22) 0px 14px 30px 0px",
+      "fontSize": "16px",
+      "fontWeight": "800",
+      "height": "48px"
+    },
+    {
+      "label": "游客进入",
+      "background": "transparent",
+      "color": "#222926",
+      "padding": "0px 12px",
+      "borderRadius": "8px",
+      "border": "1px solid rgba(34, 41, 38, 0.14)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "800",
+      "height": "42px"
+    }
+  ],
+  "cards": [],
+  "nav": null,
+  "chips": [
+    {
+      "label": "爪",
+      "background": "#3F594A",
+      "color": "#FFFDF7",
+      "padding": "0px",
+      "borderRadius": "50%",
+      "border": "0px none rgb(255, 253, 247)",
+      "boxShadow": "none",
+      "fontSize": "18px",
+      "fontWeight": "800",
+      "height": "36px"
+    }
+  ],
+  "statCells": [],
+  "tabs": [
+    {
+      "label": "登录\n          注册",
+      "background": "#F0EADF",
+      "color": "#222926",
+      "padding": "4px",
+      "borderRadius": "999px",
+      "border": "0px none rgb(34, 41, 38)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "44px"
+    },
+    {
+      "label": "登录",
+      "background": "#3F594A",
+      "color": "#FFFDF7",
+      "padding": "1px 6px",
+      "borderRadius": "999px",
+      "border": "0px none rgb(255, 253, 247)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "900",
+      "height": "36px"
+    },
+    {
+      "label": "注册",
+      "background": "transparent",
+      "color": "#69716B",
+      "padding": "1px 6px",
+      "borderRadius": "999px",
+      "border": "0px none rgb(105, 113, 107)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "900",
+      "height": "36px"
+    }
+  ]
+}

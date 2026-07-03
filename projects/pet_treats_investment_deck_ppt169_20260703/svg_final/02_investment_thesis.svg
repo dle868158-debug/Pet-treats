@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <rect width="1280" height="720" fill="#F6F8F3" />
+  <path fill="#2F5D50" d="M57,44 H57 A5,5 0 0 1 62,49 V89 A5,5 0 0 1 57,94 H57 A5,5 0 0 1 52,89 V49 A5,5 0 0 1 57,44 Z" />
+  <text x="82" y="78" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="42" font-weight="800" fill="#1E2A25">岚禾小食适合合作方快速讲清、快速陈列、快速演示</text>
+  <text x="82" y="114" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">招商核心不是堆参数，而是把产品、场景和经营数据组织成可复述的成交逻辑</text>
+  <path fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5" d="M76,164 H304 A16,16 0 0 1 320,180 V334 A16,16 0 0 1 304,350 H76 A16,16 0 0 1 60,334 V180 A16,16 0 0 1 76,164 Z" />
+
+  <g transform="translate(88, 190) scale(1.58333)" fill="#2F5D50">
+    <path d="M8.207 3.793a1 1 0 0 1 0 1.414l-2.5 2.5a1 1 0 0 1 -1.414 0l-1.5 -1.5a1 1 0 0 1 1.414 -1.414l.793 .793l1.793 -1.793a1 1 0 0 1 1.414 0" />
+    <path d="M8.207 9.793a1 1 0 0 1 0 1.414l-2.5 2.5a1 1 0 0 1 -1.414 0l-1.5 -1.5a1 1 0 0 1 1.414 -1.414l.793 .793l1.793 -1.793a1 1 0 0 1 1.414 0" />
+    <path d="M8.207 15.793a1 1 0 0 1 0 1.414l-2.5 2.5a1 1 0 0 1 -1.414 0l-1.5 -1.5a1 1 0 0 1 1.414 -1.414l.793 .793l1.793 -1.793a1 1 0 0 1 1.414 0" />
+    <path d="M21 6a1 1 0 0 1 -1 1h-9a1 1 0 0 1 0 -2h9a1 1 0 0 1 1 1" />
+    <path d="M21 12a1 1 0 0 1 -1 1h-9a1 1 0 0 1 0 -2h9a1 1 0 0 1 1 1" />
+    <path d="M21 18a1 1 0 0 1 -1 1h-9a1 1 0 0 1 0 -2h9a1 1 0 0 1 1 1" />
+  </g>
+  <text x="88" y="278" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="62" font-weight="800" fill="#2F5D50">0</text>
+  <text x="150" y="278" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="28" font-weight="700" fill="#5F6E65">登录门槛</text>
+  <text x="88" y="315" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#5F6E65">后台公开演示，适合招商会现场打开</text>
+  <path fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5" d="M366,164 H594 A16,16 0 0 1 610,180 V334 A16,16 0 0 1 594,350 H366 A16,16 0 0 1 350,334 V180 A16,16 0 0 1 366,164 Z" />
+
+  <g transform="translate(378, 190) scale(1.58333)" fill="#2F5D50">
+    <path d="M6 2a1 1 0 0 1 .993 .883l.007 .117v1.068l13.071 .935a1 1 0 0 1 .929 1.024l-.01 .114l-1 7a1 1 0 0 1 -.877 .853l-.113 .006h-12v2h10a3 3 0 1 1 -2.995 3.176l-.005 -.176l.005 -.176c.017 -.288 .074 -.564 .166 -.824h-5.342a3 3 0 1 1 -5.824 1.176l-.005 -.176l.005 -.176a3.002 3.002 0 0 1 1.995 -2.654v-12.17h-1a1 1 0 0 1 -.993 -.883l-.007 -.117a1 1 0 0 1 .883 -.993l.117 -.007h2zm0 16a1 1 0 1 0 0 2a1 1 0 0 0 0 -2m11 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2" />
+  </g>
+  <text x="378" y="278" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="62" font-weight="800" fill="#2F5D50">5</text>
+  <text x="438" y="278" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="28" font-weight="700" fill="#5F6E65">步购买链路</text>
+  <text x="378" y="315" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#5F6E65">筛选、详情、购物车、地址、下单</text>
+  <path fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5" d="M656,164 H884 A16,16 0 0 1 900,180 V334 A16,16 0 0 1 884,350 H656 A16,16 0 0 1 640,334 V180 A16,16 0 0 1 656,164 Z" />
+
+  <g transform="translate(668, 190) scale(1.58333)" fill="#D6A756">
+    <path d="M15 2a4 4 0 0 1 3.881 3.03l.016 .072l.08 .019a4 4 0 0 1 2.83 2.65l.057 .193a4 4 0 0 1 -5.847 4.51l-.047 -.029l-3.525 3.525l.042 .07a4 4 0 0 1 .117 3.696l-.102 .197a4 4 0 0 1 -4.386 1.969a3.99 3.99 0 0 1 -2.982 -2.904l-.023 -.095l-.138 -.033a4 4 0 0 1 -2.82 -2.783l-.05 -.199a4 4 0 0 1 5.865 -4.368l.068 .04l3.524 -3.524l-.036 -.061a4 4 0 0 1 -.293 -3.295l.079 -.205a4 4 0 0 1 3.695 -2.47l-.139 .004l.02 -.003z" />
+  </g>
+  <text x="668" y="278" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="62" font-weight="800" fill="#D6A756">4</text>
+  <text x="728" y="278" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="28" font-weight="700" fill="#5F6E65">类主推零食</text>
+  <text x="668" y="315" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#5F6E65">鸡肉、冻干、洁齿、训练奖励</text>
+  <path fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5" d="M946,164 H1204 A16,16 0 0 1 1220,180 V334 A16,16 0 0 1 1204,350 H946 A16,16 0 0 1 930,334 V180 A16,16 0 0 1 946,164 Z" />
+
+  <g transform="translate(958, 190) scale(1.58333)" fill="#D6A756">
+    <path d="M12 2.954a10 10 0 0 1 6.222 17.829a1 1 0 0 1 -.622 .217h-11.2a1 1 0 0 1 -.622 -.217a10 10 0 0 1 6.222 -17.829m4.207 5.839a1 1 0 0 0 -1.414 0l-2.276 2.274a2.003 2.003 0 0 0 -2.514 1.815l-.003 .118a2 2 0 1 0 3.933 -.517l2.274 -2.276a1 1 0 0 0 0 -1.414" />
+  </g>
+  <text x="958" y="278" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="62" font-weight="800" fill="#D6A756">1</text>
+  <text x="1018" y="278" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="28" font-weight="700" fill="#5F6E65">套经营后台</text>
+  <text x="958" y="315" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#5F6E65">订单、营业额、销量排行同步展示</text>
+  <path fill="#EEF4EC" stroke="#DDE6DB" stroke-width="1.5" d="M78,392 H592 A18,18 0 0 1 610,410 V574 A18,18 0 0 1 592,592 H78 A18,18 0 0 1 60,574 V410 A18,18 0 0 1 78,392 Z" />
+  <text x="92" y="442" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="28" font-weight="800" fill="#1E2A25">招商表达重点</text>
+  <text x="92" y="488" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="24" fill="#2F5D50">产品标准清楚</text>
+  <text x="92" y="526" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="24" fill="#2F5D50">消费场景明确</text>
+  <text x="92" y="564" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="24" fill="#2F5D50">经营数据能被演示</text>
+  <path fill="#2F5D50" d="M658,392 H1202 A18,18 0 0 1 1220,410 V574 A18,18 0 0 1 1202,592 H658 A18,18 0 0 1 640,574 V410 A18,18 0 0 1 658,392 Z" />
+
+  <g transform="translate(680, 430) scale(2)" fill="#FFFFFF">
+    <path d="M17 2a3 3 0 0 1 3 3v16a1 1 0 0 1 -1.555 .832l-2.318 -1.545l-1.42 1.42a1 1 0 0 1 -1.32 .083l-.094 -.083l-1.293 -1.292l-1.293 1.292a1 1 0 0 1 -1.32 .083l-.094 -.083l-1.421 -1.42l-2.317 1.545l-.019 .012l-.054 .03l-.028 .017l-.054 .023l-.05 .023l-.049 .015l-.06 .019l-.052 .009l-.057 .011l-.084 .006l-.026 .003h-.022l-.049 -.003h-.039l-.013 -.003h-.016l-.041 -.008l-.038 -.005l-.015 -.005l-.018 -.002l-.034 -.011l-.04 -.01l-.019 -.007l-.015 -.004l-.029 -.013l-.04 -.015l-.021 -.011l-.013 -.005l-.028 -.016l-.036 -.018l-.014 -.01l-.018 -.01l-.038 -.027l-.022 -.014l-.01 -.009l-.02 -.014l-.045 -.041l-.012 -.008l-.024 -.024l-.035 -.039l-.02 -.02l-.007 -.011l-.011 -.012l-.032 -.045l-.02 -.025l-.012 -.019l-.03 -.054l-.017 -.028l-.023 -.054l-.023 -.05a1 1 0 0 1 -.034 -.108l-.01 -.057l-.01 -.053l-.009 -.132v-16a3 3 0 0 1 3 -3zm-1.445 4.168a1 1 0 0 0 -1.387 .277l-2.168 3.252l-2.168 -3.252a1 1 0 0 0 -1.664 1.11l2.297 3.445h-1.465a1 1 0 0 0 0 2h2v3a1 1 0 0 0 1 1l.117 -.007a1 1 0 0 0 .883 -.993v-3h2a1 1 0 0 0 0 -2h-1.465l2.297 -3.445a1 1 0 0 0 -.277 -1.387" />
+  </g>
+  <text x="754" y="458" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="30" font-weight="800" fill="#FFFFFF">一句话招商主张</text>
+  <text x="754" y="508" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="24" fill="#FFFFFF">让合作方不只拿到一组 SKU，</text>
+  <text x="754" y="544" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="24" fill="#FFFFFF">还能拿到一套可复制的陈列和复购话术。</text>
+  <text x="60" y="674" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#8A968E">Source: 岚禾小食网页与项目代码</text>
+  <text x="1220" y="674" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#8A968E" text-anchor="end">02</text>
+</svg>

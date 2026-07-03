@@ -1,0 +1,65 @@
+{
+  "canvas": "ppt169",
+  "audience": "宠物零食渠道商、区域代理、宠物门店主理人、社区团购/私域团长，以及评估合作价值的品牌合作方。",
+  "content_divergence": "在不虚构市场规模和财务数据的前提下，基于网页与代码事实自由重构为招商叙事。",
+  "mode": "pyramid",
+  "visual_style": "soft-rounded",
+  "delivery_purpose": "balanced",
+  "page_count": "10",
+  "color": {
+    "name": "",
+    "palette": {
+      "background": "#F6F8F3",
+      "secondary_bg": "#FFFFFF",
+      "primary": "#2F5D50",
+      "accent": "#8EB69B",
+      "secondary_accent": "#D6A756",
+      "body_text": "#1E2A25"
+    }
+  },
+  "icons": "tabler-filled",
+  "typography": {
+    "name": "",
+    "heading": {
+      "cjk": "Microsoft YaHei",
+      "css": "\"Microsoft YaHei\", Arial, sans-serif",
+      "latin": "Arial",
+      "sample_cjk": "天然宠物零食招商方案",
+      "sample_latin": "Natural Pet Treats Partnership"
+    },
+    "body": {
+      "cjk": "Microsoft YaHei",
+      "css": "\"Microsoft YaHei\", Arial, sans-serif",
+      "latin": "Arial",
+      "sample_cjk": "产品矩阵清晰，前台选购与后台统计形成可演示的经营闭环。",
+      "sample_latin": "A clear product matrix with a demonstrable operating loop."
+    },
+    "body_size": 24,
+    "sizes": {
+      "annotation": 18,
+      "subtitle": 32,
+      "title": 46
+    },
+    "body_size_unit": "px"
+  },
+  "formula_policy": "text-only",
+  "image_usage": [
+    "ai",
+    "provided"
+  ],
+  "image_notes": "封面和招商收束页使用 AI 生成的温暖宠物生活方式主视觉；产品矩阵和数字化运营页优先使用项目本地商品图与界面概念素材；所有招商数据、中文标签和合作条款均用可编辑 SVG 文本绘制，不烘焙进图片。",
+  "image_ai_path": "auto",
+  "generation_mode": "continuous",
+  "refine_spec": false,
+  "image_strategy": {
+    "name": "温暖生活方式插画",
+    "rendering": "flat",
+    "palette": "warm-earth",
+    "visual": "圆润扁平插画，猫狗、零食袋、厨房台面和门店陈列用柔和块面表达。",
+    "color": "背景保持大面积米白和浅暖色，深绿承担品牌识别，金棕只做少量强调。",
+    "mood": "可信、温暖、亲和，适合招商但不过度儿童化。"
+  },
+  "stage": "final",
+  "status": "confirmed",
+  "confirmed_at": "2026-07-03T01:23:41"
+}

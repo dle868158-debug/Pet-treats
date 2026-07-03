@@ -1,0 +1,181 @@
+{
+  "lang": "zh",
+  "tier": 2,
+  "recommend": {
+    "page_count": "10",
+    "icons": "tabler-filled",
+    "formula_policy": "text-only",
+    "image_usage": ["ai", "provided"],
+    "image_ai_path": "auto",
+    "generation_mode": "continuous",
+    "refine_spec": false
+  },
+  "page_count": {
+    "value": "10"
+  },
+  "image_notes": {
+    "value": "封面和招商收束页使用 AI 生成的温暖宠物生活方式主视觉；产品矩阵和数字化运营页优先使用项目本地商品图与界面概念素材；所有招商数据、中文标签和合作条款均用可编辑 SVG 文本绘制，不烘焙进图片。"
+  },
+  "color": {
+    "selected": 0,
+    "candidates": [
+      {
+        "name_zh": "天然高端",
+        "name_en": "Natural Premium",
+        "note_zh": "沿用宠物食品的自然感，但用深绿和金棕提高招商场景的可信度。",
+        "note_en": "Natural pet-food warmth with deeper green and gold-brown credibility.",
+        "palette": {
+          "background": "#FAF7EF",
+          "secondary_bg": "#FFFDF7",
+          "primary": "#3F594A",
+          "accent": "#B98558",
+          "secondary_accent": "#C79B4B",
+          "body_text": "#222926"
+        }
+      },
+      {
+        "name_zh": "清洁实验室",
+        "name_en": "Clean Lab",
+        "note_zh": "更强调可溯源、短配方和标准化运营，适合偏理性的渠道招商。",
+        "note_en": "Cleaner and more operational, suited to rational channel conversations.",
+        "palette": {
+          "background": "#F6F8F3",
+          "secondary_bg": "#FFFFFF",
+          "primary": "#2F5D50",
+          "accent": "#8EB69B",
+          "secondary_accent": "#D6A756",
+          "body_text": "#1E2A25"
+        }
+      },
+      {
+        "name_zh": "暖木零售",
+        "name_en": "Warm Retail",
+        "note_zh": "更接近线下宠物门店和生活方式零售，亲和、有货架感。",
+        "note_en": "Closer to pet retail and lifestyle merchandising; warm and shelf-ready.",
+        "palette": {
+          "background": "#FBF1E6",
+          "secondary_bg": "#FFF9F2",
+          "primary": "#6F4E37",
+          "accent": "#D68052",
+          "secondary_accent": "#6F8974",
+          "body_text": "#2A211B"
+        }
+      }
+    ]
+  },
+  "typography": {
+    "selected": 0,
+    "candidates": [
+      {
+        "name_zh": "圆润商务黑体",
+        "name_en": "Rounded Business Sans",
+        "note_zh": "稳妥、清晰、适合招商路演；中文阅读舒适，数字和标签也干净。",
+        "note_en": "Clear and business-safe for pitch delivery.",
+        "sample_heading": "天然宠物零食招商方案",
+        "sample_heading_latin": "Natural Pet Treats Partnership",
+        "sample_body": "产品矩阵清晰，前台选购与后台统计形成可演示的经营闭环。",
+        "sample_body_latin": "A clear product matrix with a demonstrable operating loop.",
+        "heading": {
+          "cjk": "Microsoft YaHei",
+          "latin": "Arial",
+          "css": "\"Microsoft YaHei\", Arial, sans-serif"
+        },
+        "body": {
+          "cjk": "Microsoft YaHei",
+          "latin": "Arial",
+          "css": "\"Microsoft YaHei\", Arial, sans-serif"
+        },
+        "body_size": 24,
+        "sizes": {
+          "title": 46,
+          "subtitle": 32,
+          "annotation": 18
+        }
+      },
+      {
+        "name_zh": "编辑标题 + 商务正文",
+        "name_en": "Editorial Headline + Business Body",
+        "note_zh": "标题更像品牌专题，正文仍保持商务可读性。",
+        "note_en": "Editorial titles with readable business body copy.",
+        "sample_heading": "一口干净真实的好味道",
+        "sample_heading_latin": "Clean, Real Treats",
+        "sample_body": "从短配方到数字化订单，合作方看到的不只是产品，也是可运营的零售方案。",
+        "sample_body_latin": "Partners see not only products, but an operable retail offer.",
+        "heading": {
+          "cjk": "Microsoft YaHei",
+          "latin": "Georgia",
+          "css": "Georgia, \"Microsoft YaHei\", serif"
+        },
+        "body": {
+          "cjk": "Microsoft YaHei",
+          "latin": "Arial",
+          "css": "\"Microsoft YaHei\", Arial, sans-serif"
+        },
+        "body_size": 24,
+        "sizes": {
+          "title": 48,
+          "subtitle": 32,
+          "annotation": 18
+        }
+      },
+      {
+        "name_zh": "门店导购式粗黑体",
+        "name_en": "Retail Display Sans",
+        "note_zh": "标题更强、更像货架陈列与销售物料，适合强调渠道转化。",
+        "note_en": "Stronger display tone for retail and sales conversion.",
+        "sample_heading": "好陈列、好讲解、好复购",
+        "sample_heading_latin": "Easy to Display, Explain, Repeat",
+        "sample_body": "四类零食覆盖训练、加餐、洁齿和挑嘴场景，帮助门店快速讲清卖点。",
+        "sample_body_latin": "Four treat lines cover clear shopping occasions.",
+        "heading": {
+          "cjk": "Microsoft YaHei",
+          "latin": "Arial",
+          "css": "\"Microsoft YaHei\", Arial, sans-serif"
+        },
+        "body": {
+          "cjk": "Microsoft YaHei",
+          "latin": "Arial",
+          "css": "\"Microsoft YaHei\", Arial, sans-serif"
+        },
+        "body_size": 24,
+        "sizes": {
+          "title": 50,
+          "subtitle": 34,
+          "annotation": 18
+        }
+      }
+    ]
+  },
+  "image_strategy": {
+    "selected": 0,
+    "candidates": [
+      {
+        "name": "温暖生活方式插画",
+        "rendering": "flat",
+        "palette": "warm-earth",
+        "visual": "圆润扁平插画，猫狗、零食袋、厨房台面和门店陈列用柔和块面表达。",
+        "color": "背景保持大面积米白和浅暖色，深绿承担品牌识别，金棕只做少量强调。",
+        "mood": "可信、温暖、亲和，适合招商但不过度儿童化。"
+      },
+      {
+        "name": "自然有机质感",
+        "rendering": "nature",
+        "palette": "nature-organic",
+        "visual": "有机叶片、肉源、谷物和宠物陪伴场景，弱化商业感，强化天然来源。",
+        "color": "绿色和米色占主导，棕金点出零食和包装，整体低饱和。",
+        "mood": "自然、安心、可持续，适合强调短配方和低温慢制。"
+      },
+      {
+        "name": "编辑式产品摄影",
+        "rendering": "corporate-photo",
+        "palette": "warm-earth",
+        "visual": "明亮厨房或宠物门店里的真实产品摆放，像生活方式杂志大片。",
+        "color": "真实照片色调偏暖，使用品牌深绿和金棕叠加为标题与信息层。",
+        "mood": "高级、真实、零售感更强，适合招商封面和产品矩阵页。"
+      }
+    ]
+  },
+  "refine_spec": {
+    "value": false
+  }
+}

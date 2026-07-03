@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <rect width="1280" height="720" fill="#F6F8F3" />
+  <text x="60" y="78" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="44" font-weight="800" fill="#1E2A25">四类渠道都能找到自己的合作切入点</text>
+  <text x="60" y="116" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#5F6E65">同一套商品与演示系统，可以对应不同渠道的转化方式和经营关注点</text>
+  <path fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5" d="M86,166 H318 A18,18 0 0 1 336,184 V566 A18,18 0 0 1 318,584 H86 A18,18 0 0 1 68,566 V184 A18,18 0 0 1 86,166 Z" />
+  <path d="M 68 166 h 268 a 18 18 0 0 1 18 18 v 96 h -286 v -114 Z" fill="#EEF4EC" />
+
+  <g transform="translate(176, 196) scale(2.16667)" fill="#2F5D50">
+    <path d="M12 10c-1.32 0 -1.983 .421 -2.931 1.924l-.244 .398l-.395 .688a50.89 50.89 0 0 0 -.141 .254c-.24 .434 -.571 .753 -1.139 1.142l-.55 .365c-.94 .627 -1.432 1.118 -1.707 1.955c-.124 .338 -.196 .853 -.193 1.28c0 1.687 1.198 2.994 2.8 2.994l.242 -.006c.119 -.006 .234 -.017 .354 -.034l.248 -.043l.132 -.028l.291 -.073l.162 -.045l.57 -.17l.763 -.243l.455 -.136c.53 -.15 .94 -.222 1.283 -.222c.344 0 .753 .073 1.283 .222l.455 .136l.764 .242l.569 .171l.312 .084c.097 .024 .187 .045 .273 .062l.248 .043c.12 .017 .235 .028 .354 .034l.242 .006c1.602 0 2.8 -1.307 2.8 -3c0 -.427 -.073 -.939 -.207 -1.306c-.236 -.724 -.677 -1.223 -1.48 -1.83l-.257 -.19l-.528 -.38c-.642 -.47 -1.003 -.826 -1.253 -1.278l-.27 -.485l-.252 -.432c-1.011 -1.696 -1.618 -2.099 -3.053 -2.099z" />
+    <path d="M19.78 7h-.03c-1.219 .02 -2.35 1.066 -2.908 2.504c-.69 1.775 -.348 3.72 1.075 4.333c.256 .109 .527 .163 .801 .163c1.231 0 2.38 -1.053 2.943 -2.504c.686 -1.774 .34 -3.72 -1.076 -4.332a2.05 2.05 0 0 0 -.804 -.164z" />
+    <path d="M9.025 3c-.112 0 -.185 .002 -.27 .015l-.093 .016c-1.532 .206 -2.397 1.989 -2.108 3.855c.272 1.725 1.462 3.114 2.92 3.114l.187 -.005a1.26 1.26 0 0 0 .084 -.01l.092 -.016c1.533 -.206 2.397 -1.989 2.108 -3.855c-.27 -1.727 -1.46 -3.114 -2.92 -3.114z" />
+    <path d="M14.972 3c-1.459 0 -2.647 1.388 -2.916 3.113c-.29 1.867 .574 3.65 2.174 3.867c.103 .013 .2 .02 .296 .02c1.39 0 2.543 -1.265 2.877 -2.883l.041 -.23c.29 -1.867 -.574 -3.65 -2.174 -3.867a2.154 2.154 0 0 0 -.298 -.02z" />
+    <path d="M4.217 7c-.274 0 -.544 .054 -.797 .161c-1.426 .615 -1.767 2.562 -1.078 4.335c.563 1.451 1.71 2.504 2.941 2.504c.274 0 .544 -.054 .797 -.161c1.426 -.615 1.767 -2.562 1.078 -4.335c-.563 -1.451 -1.71 -2.504 -2.941 -2.504z" />
+  </g>
+  <text x="202" y="286" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="25" font-weight="800" fill="#1E2A25">宠物门店</text>
+  <text x="104" y="344" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="21" font-weight="800" fill="#2F5D50">切入点</text>
+  <text x="104" y="382" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">常备陈列、搭配主粮、</text>
+  <text x="104" y="414" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">复购提醒和会员推荐</text>
+  <line x1="104" y1="454" x2="300" y2="454" stroke="#DDE6DB" stroke-width="1.5" />
+  <text x="104" y="498" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="21" font-weight="800" fill="#2F5D50">看重</text>
+  <text x="104" y="536" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">货架动销与会员复购</text>
+  <path fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5" d="M380,166 H612 A18,18 0 0 1 630,184 V566 A18,18 0 0 1 612,584 H380 A18,18 0 0 1 362,566 V184 A18,18 0 0 1 380,166 Z" />
+  <path d="M 362 166 h 268 a 18 18 0 0 1 18 18 v 96 h -286 v -114 Z" fill="#EEF4EC" />
+
+  <g transform="translate(470, 196) scale(2.16667)" fill="#D6A756">
+    <path d="M13 4a1 1 0 0 1 1 1h4a1 1 0 0 1 .783 .378l.074 .108l3 5l.055 .103l.04 .107l.029 .109l.016 .11l.003 .085v6a1 1 0 0 1 -1 1h-1.171a3.001 3.001 0 0 1 -5.658 0h-4.342a3.001 3.001 0 0 1 -5.658 0h-1.171a1 1 0 0 1 -1 -1v-11a2 2 0 0 1 2 -2zm-6 12a1 1 0 1 0 0 2a1 1 0 0 0 0 -2m10 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2m.434 -9h-3.434v3h5.234z" />
+  </g>
+  <text x="496" y="286" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="25" font-weight="800" fill="#1E2A25">区域代理</text>
+  <text x="398" y="344" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="21" font-weight="800" fill="#D6A756">切入点</text>
+  <text x="398" y="382" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">标准话术、样品组合、</text>
+  <text x="398" y="414" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">客户拜访演示后台</text>
+  <line x1="398" y1="454" x2="594" y2="454" stroke="#DDE6DB" stroke-width="1.5" />
+  <text x="398" y="498" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="21" font-weight="800" fill="#D6A756">看重</text>
+  <text x="398" y="536" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">铺货效率与招商说服力</text>
+  <path fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5" d="M674,166 H906 A18,18 0 0 1 924,184 V566 A18,18 0 0 1 906,584 H674 A18,18 0 0 1 656,566 V184 A18,18 0 0 1 674,166 Z" />
+  <path d="M 656 166 h 268 a 18 18 0 0 1 18 18 v 96 h -286 v -114 Z" fill="#EEF4EC" />
+
+  <g transform="translate(764, 196) scale(2.16667)" fill="#2F5D50">
+    <path d="M12 2a5 5 0 1 1 -5 5l.005 -.217a5 5 0 0 1 4.995 -4.783z" />
+    <path d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" />
+  </g>
+  <text x="790" y="286" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="25" font-weight="800" fill="#1E2A25">私域团长</text>
+  <text x="692" y="344" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="21" font-weight="800" fill="#2F5D50">切入点</text>
+  <text x="692" y="382" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">场景种草、组合包、</text>
+  <text x="692" y="414" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">晒单和复购提醒</text>
+  <line x1="692" y1="454" x2="888" y2="454" stroke="#DDE6DB" stroke-width="1.5" />
+  <text x="692" y="498" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="21" font-weight="800" fill="#2F5D50">看重</text>
+  <text x="692" y="536" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">内容转化与复购节奏</text>
+  <path fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5" d="M968,166 H1200 A18,18 0 0 1 1218,184 V566 A18,18 0 0 1 1200,584 H968 A18,18 0 0 1 950,566 V184 A18,18 0 0 1 968,166 Z" />
+  <path d="M 950 166 h 268 a 18 18 0 0 1 18 18 v 96 h -286 v -114 Z" fill="#EEF4EC" />
+
+  <g transform="translate(1058, 196) scale(2.16667)" fill="#D6A756">
+    <path d="M12 2.954a10 10 0 0 1 6.222 17.829a1 1 0 0 1 -.622 .217h-11.2a1 1 0 0 1 -.622 -.217a10 10 0 0 1 6.222 -17.829m4.207 5.839a1 1 0 0 0 -1.414 0l-2.276 2.274a2.003 2.003 0 0 0 -2.514 1.815l-.003 .118a2 2 0 1 0 3.933 -.517l2.274 -2.276a1 1 0 0 0 0 -1.414" />
+  </g>
+  <text x="1084" y="286" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="25" font-weight="800" fill="#1E2A25">品牌合作方</text>
+  <text x="986" y="344" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="21" font-weight="800" fill="#D6A756">切入点</text>
+  <text x="986" y="382" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">联名试销、线上专题、</text>
+  <text x="986" y="414" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">数据看板复盘</text>
+  <line x1="986" y1="454" x2="1182" y2="454" stroke="#DDE6DB" stroke-width="1.5" />
+  <text x="986" y="498" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="21" font-weight="800" fill="#D6A756">看重</text>
+  <text x="986" y="536" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">低成本验证与共创空间</text>
+  <text x="60" y="674" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#8A968E">Source: 招商对象与商城功能映射</text>
+  <text x="1220" y="674" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#8A968E" text-anchor="end">08</text>
+</svg>

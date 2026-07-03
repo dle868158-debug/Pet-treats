@@ -1,0 +1,10 @@
+[p] Natural Pet Treats
+[h1] 岚禾小食
+[p] 先登录账户，或以游客身份浏览精选宠物零食。
+[p] Member Access
+[h2] 进入岚禾小食
+[p] 登录后可以管理多个收货地址；游客可以浏览和加购，购买前需要登录。
+[button] 登录并进入
+[span] 确认密码
+[button] 注册并进入
+[button] 游客进入

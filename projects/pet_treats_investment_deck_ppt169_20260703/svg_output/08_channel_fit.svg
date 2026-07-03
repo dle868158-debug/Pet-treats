@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <rect width="1280" height="720" fill="#F6F8F3"/>
+  <text x="60" y="78" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="44" font-weight="800" fill="#1E2A25">四类渠道都能找到自己的合作切入点</text>
+  <text x="60" y="116" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="20" fill="#5F6E65">同一套商品与演示系统，可以对应不同渠道的转化方式和经营关注点</text>
+  <rect x="68" y="166" width="268" height="418" rx="18" fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5"/>
+  <path d="M 68 166 h 268 a 18 18 0 0 1 18 18 v 96 h -286 v -114 Z" fill="#EEF4EC"/>
+  <use data-icon="tabler-filled/paw" x="176" y="196" width="52" height="52" fill="#2F5D50"/>
+  <text x="202" y="286" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="25" font-weight="800" fill="#1E2A25">宠物门店</text>
+  <text x="104" y="344" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="21" font-weight="800" fill="#2F5D50">切入点</text>
+  <text x="104" y="382" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">常备陈列、搭配主粮、</text>
+  <text x="104" y="414" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">复购提醒和会员推荐</text>
+  <line x1="104" y1="454" x2="300" y2="454" stroke="#DDE6DB" stroke-width="1.5"/>
+  <text x="104" y="498" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="21" font-weight="800" fill="#2F5D50">看重</text>
+  <text x="104" y="536" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">货架动销与会员复购</text>
+  <rect x="362" y="166" width="268" height="418" rx="18" fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5"/>
+  <path d="M 362 166 h 268 a 18 18 0 0 1 18 18 v 96 h -286 v -114 Z" fill="#EEF4EC"/>
+  <use data-icon="tabler-filled/truck" x="470" y="196" width="52" height="52" fill="#D6A756"/>
+  <text x="496" y="286" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="25" font-weight="800" fill="#1E2A25">区域代理</text>
+  <text x="398" y="344" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="21" font-weight="800" fill="#D6A756">切入点</text>
+  <text x="398" y="382" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">标准话术、样品组合、</text>
+  <text x="398" y="414" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">客户拜访演示后台</text>
+  <line x1="398" y1="454" x2="594" y2="454" stroke="#DDE6DB" stroke-width="1.5"/>
+  <text x="398" y="498" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="21" font-weight="800" fill="#D6A756">看重</text>
+  <text x="398" y="536" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">铺货效率与招商说服力</text>
+  <rect x="656" y="166" width="268" height="418" rx="18" fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5"/>
+  <path d="M 656 166 h 268 a 18 18 0 0 1 18 18 v 96 h -286 v -114 Z" fill="#EEF4EC"/>
+  <use data-icon="tabler-filled/user" x="764" y="196" width="52" height="52" fill="#2F5D50"/>
+  <text x="790" y="286" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="25" font-weight="800" fill="#1E2A25">私域团长</text>
+  <text x="692" y="344" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="21" font-weight="800" fill="#2F5D50">切入点</text>
+  <text x="692" y="382" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">场景种草、组合包、</text>
+  <text x="692" y="414" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">晒单和复购提醒</text>
+  <line x1="692" y1="454" x2="888" y2="454" stroke="#DDE6DB" stroke-width="1.5"/>
+  <text x="692" y="498" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="21" font-weight="800" fill="#2F5D50">看重</text>
+  <text x="692" y="536" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">内容转化与复购节奏</text>
+  <rect x="950" y="166" width="268" height="418" rx="18" fill="#FFFFFF" stroke="#DDE6DB" stroke-width="1.5"/>
+  <path d="M 950 166 h 268 a 18 18 0 0 1 18 18 v 96 h -286 v -114 Z" fill="#EEF4EC"/>
+  <use data-icon="tabler-filled/dashboard" x="1058" y="196" width="52" height="52" fill="#D6A756"/>
+  <text x="1084" y="286" text-anchor="middle" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="25" font-weight="800" fill="#1E2A25">品牌合作方</text>
+  <text x="986" y="344" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="21" font-weight="800" fill="#D6A756">切入点</text>
+  <text x="986" y="382" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">联名试销、线上专题、</text>
+  <text x="986" y="414" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">数据看板复盘</text>
+  <line x1="986" y1="454" x2="1182" y2="454" stroke="#DDE6DB" stroke-width="1.5"/>
+  <text x="986" y="498" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="21" font-weight="800" fill="#D6A756">看重</text>
+  <text x="986" y="536" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="19" fill="#5F6E65">低成本验证与共创空间</text>
+  <text x="60" y="674" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#8A968E">Source: 招商对象与商城功能映射</text>
+  <text x="1220" y="674" font-family="'Microsoft YaHei', Arial, sans-serif" font-size="15" fill="#8A968E" text-anchor="end">08</text>
+</svg>

@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <title>爪味自然宠物零食宣传视频</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #faf7ef;
+        font-family: sans-serif;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #faf7ef;
+        color: #222926;
+      }
+
+      .scene {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #faf7ef;
+      }
+
+      #scene1 {
+        z-index: 1;
+        opacity: 1;
+      }
+
+      #scene2 {
+        z-index: 2;
+        opacity: 0;
+      }
+
+      #scene3 {
+        z-index: 3;
+        opacity: 0;
+      }
+
+      #scene4 {
+        z-index: 4;
+        opacity: 0;
+      }
+
+      #scene5 {
+        z-index: 5;
+        opacity: 0;
+      }
+
+      #scene6 {
+        z-index: 6;
+        opacity: 0;
+      }
+
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .paper-scrim {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 860px;
+        height: 1080px;
+        background: #faf7ef;
+        opacity: 0.93;
+      }
+
+      .scene-content {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        padding: 96px 112px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .brand-row {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        color: #222926;
+        font-size: 32px;
+        font-weight: 900;
+      }
+
+      .brand-mark {
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fffdf7;
+        background: #3f594a;
+        font-weight: 900;
+      }
+
+      .eyebrow {
+        margin: 0;
+        color: #3f594a;
+        font-size: 24px;
+        font-weight: 900;
+      }
+
+      .headline {
+        margin: 0;
+        max-width: 760px;
+        color: #222926;
+        font-size: 104px;
+        line-height: 1.02;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+      }
+
+      .subline {
+        margin: 0;
+        max-width: 720px;
+        color: #69716b;
+        font-size: 34px;
+        line-height: 1.35;
+        font-weight: 700;
+      }
+
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        margin-top: 42px;
+      }
+
+      .chip {
+        min-height: 58px;
+        display: flex;
+        align-items: center;
+        padding: 0 26px;
+        color: #3f594a;
+        background: #fffdf7;
+        border: 2px solid rgba(34, 41, 38, 0.14);
+        border-radius: 999px;
+        font-size: 26px;
+        font-weight: 900;
+        box-shadow: 0 16px 38px rgba(35, 42, 39, 0.12);
+      }
+
+      .chip.strong {
+        color: #fffdf7;
+        background: #3f594a;
+        border-color: #3f594a;
+      }
+
+      .caption {
+        position: absolute;
+        left: 180px;
+        right: 180px;
+        bottom: 38px;
+        z-index: 40;
+        min-height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 44px;
+        color: #fffdf7;
+        background: rgba(34, 41, 38, 0.82);
+        border: 2px solid rgba(255, 253, 247, 0.18);
+        border-radius: 999px;
+        font-size: 40px;
+        font-weight: 900;
+        text-align: center;
+        box-shadow: 0 24px 58px rgba(35, 42, 39, 0.24);
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .zebra-stamp {
+        width: fit-content;
+        margin-top: 58px;
+        padding: 16px 24px;
+        color: #fffdf7;
+        background: #b98558;
+        border-radius: 12px;
+        font-size: 30px;
+        font-weight: 900;
+        box-shadow: 0 18px 40px rgba(185, 133, 88, 0.28);
+      }
+
+      .section-title {
+        margin: 0;
+        color: #222926;
+        font-size: 68px;
+        line-height: 1.08;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+      }
+
+      .section-copy {
+        margin: 16px 0 0;
+        color: #69716b;
+        font-size: 30px;
+        font-weight: 700;
+      }
+
+      .product-grid {
+        margin-top: 58px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 26px;
+      }
+
+      .product-card {
+        min-height: 560px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        background: #fffdf7;
+        border: 2px solid rgba(34, 41, 38, 0.14);
+        border-radius: 18px;
+        box-shadow: 0 28px 58px rgba(35, 42, 39, 0.13);
+      }
+
+      .product-img-wrap {
+        height: 280px;
+        overflow: hidden;
+        background: #efe8dc;
+      }
+
+      .product-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .product-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        padding: 28px;
+      }
+
+      .tag {
+        width: fit-content;
+        min-height: 38px;
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+        color: #3f594a;
+        background: #efe8dc;
+        border-radius: 999px;
+        font-size: 22px;
+        font-weight: 900;
+      }
+
+      .product-card h3 {
+        margin: 0;
+        color: #222926;
+        font-size: 34px;
+        font-weight: 900;
+      }
+
+      .product-card p {
+        margin: 0;
+        color: #69716b;
+        font-size: 25px;
+        line-height: 1.34;
+        font-weight: 700;
+      }
+
+      .price {
+        margin-top: auto;
+        color: #b98558;
+        font-size: 34px;
+        font-weight: 900;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .standards-layout {
+        display: grid;
+        grid-template-columns: 1fr 620px;
+        gap: 66px;
+        height: 100%;
+        align-items: center;
+      }
+
+      .standard-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        margin-top: 28px;
+      }
+
+      .standard-item {
+        display: grid;
+        grid-template-columns: 112px 1fr;
+        gap: 28px;
+        align-items: center;
+        min-height: 112px;
+        padding: 22px;
+        background: #fffdf7;
+        border: 2px solid rgba(34, 41, 38, 0.14);
+        border-radius: 18px;
+        box-shadow: 0 22px 44px rgba(35, 42, 39, 0.1);
+      }
+
+      .standard-number {
+        color: #c79b4b;
+        font-size: 56px;
+        line-height: 1;
+        font-weight: 900;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .standard-item h3 {
+        margin: 0;
+        color: #222926;
+        font-size: 32px;
+        font-weight: 900;
+      }
+
+      .standard-item p {
+        margin: 8px 0 0;
+        color: #69716b;
+        font-size: 22px;
+        font-weight: 700;
+      }
+
+      .photo-panel {
+        height: 720px;
+        overflow: hidden;
+        background: #efe8dc;
+        border: 2px solid rgba(34, 41, 38, 0.14);
+        border-radius: 28px;
+        box-shadow: 0 30px 70px rgba(35, 42, 39, 0.16);
+      }
+
+      .photo-panel img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .flow-wrap {
+        margin-top: 92px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .flow-line {
+        position: absolute;
+        left: 86px;
+        right: 86px;
+        top: 82px;
+        height: 8px;
+        background: #6f8974;
+        border-radius: 99px;
+      }
+
+      .flow-node {
+        position: relative;
+        z-index: 2;
+        width: 310px;
+        min-height: 250px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+        padding: 30px;
+        background: #fffdf7;
+        border: 2px solid rgba(34, 41, 38, 0.14);
+        border-radius: 22px;
+        box-shadow: 0 24px 52px rgba(35, 42, 39, 0.12);
+      }
+
+      .flow-icon {
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fffdf7;
+        background: #3f594a;
+        font-size: 42px;
+        font-weight: 900;
+      }
+
+      .flow-node h3 {
+        margin: 0;
+        color: #222926;
+        font-size: 32px;
+        font-weight: 900;
+      }
+
+      .flow-node p {
+        margin: 0;
+        color: #69716b;
+        font-size: 24px;
+        font-weight: 700;
+        text-align: center;
+      }
+
+      .admin-layout {
+        display: grid;
+        grid-template-columns: 610px 1fr;
+        gap: 48px;
+        margin-top: 50px;
+      }
+
+      .metric-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+      }
+
+      .metric-card {
+        min-height: 174px;
+        padding: 28px;
+        background: #fffdf7;
+        border: 2px solid rgba(34, 41, 38, 0.14);
+        border-radius: 18px;
+        box-shadow: 0 22px 44px rgba(35, 42, 39, 0.1);
+      }
+
+      .metric-card span {
+        color: #69716b;
+        font-size: 24px;
+        font-weight: 900;
+      }
+
+      .metric-card strong {
+        display: block;
+        margin-top: 18px;
+        color: #3f594a;
+        font-size: 52px;
+        line-height: 1;
+        font-weight: 900;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .dashboard-panel {
+        padding: 28px;
+        background: #222926;
+        border-radius: 22px;
+        box-shadow: 0 30px 70px rgba(35, 42, 39, 0.18);
+      }
+
+      .rank-row {
+        display: grid;
+        grid-template-columns: 50px 1fr 90px;
+        gap: 12px;
+        align-items: center;
+        min-height: 74px;
+        margin-bottom: 16px;
+        padding: 0 14px;
+        color: #fffdf7;
+        background: rgba(255, 253, 247, 0.08);
+        border: 1px solid rgba(255, 253, 247, 0.16);
+        border-radius: 14px;
+        font-size: 22px;
+        font-weight: 800;
+      }
+
+      .rank-index {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #222926;
+        background: #c79b4b;
+        font-weight: 900;
+      }
+
+      .bar {
+        height: 16px;
+        border-radius: 99px;
+        background: #6f8974;
+      }
+
+      .closing-panel {
+        position: relative;
+        z-index: 3;
+        width: 820px;
+        min-height: 720px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 34px;
+        padding: 72px;
+        background: rgba(250, 247, 239, 0.94);
+        border: 2px solid rgba(255, 253, 247, 0.72);
+        border-radius: 30px;
+        box-shadow: 0 34px 80px rgba(35, 42, 39, 0.18);
+      }
+
+      .closing-panel h2 {
+        margin: 0;
+        color: #222926;
+        font-size: 82px;
+        line-height: 1.06;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+      }
+
+      .closing-panel p {
+        margin: 0;
+        color: #69716b;
+        font-size: 32px;
+        line-height: 1.38;
+        font-weight: 700;
+      }
+
+      .brand-footer {
+        margin-top: 28px;
+        color: #3f594a;
+        font-size: 28px;
+        font-weight: 900;
+      }
+
+      .light-leak {
+        position: absolute;
+        z-index: 90;
+        left: -360px;
+        top: -260px;
+        width: 2400px;
+        height: 1600px;
+        opacity: 0;
+        background:
+          radial-gradient(circle at 22% 44%, rgba(199, 155, 75, 0.72) 0%, rgba(199, 155, 75, 0.22) 18%, rgba(250, 247, 239, 0) 42%),
+          radial-gradient(circle at 64% 36%, rgba(185, 133, 88, 0.54) 0%, rgba(185, 133, 88, 0.18) 20%, rgba(250, 247, 239, 0) 44%);
+        pointer-events: none;
+      }
+
+      .final-wash {
+        position: absolute;
+        inset: 0;
+        z-index: 95;
+        opacity: 0;
+        background: #faf7ef;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-9wc5" id="root" data-composition-id="paw-natural-promo" data-width="1920" data-height="1080" data-start="0" data-duration="30.83">
+      <audio data-hf-id="hf-70lc" id="voice-01" data-start="0" data-duration="2.012" data-track-index="0" src="voice/voice-01.wav" data-volume="1"></audio>
+      <audio data-hf-id="hf-6iy1" id="voice-02" data-start="4" data-duration="5.002" data-track-index="1" src="voice/voice-02.wav" data-volume="1"></audio>
+      <audio data-hf-id="hf-itwh" id="voice-03" data-start="9" data-duration="4.562" data-track-index="2" src="voice/voice-03.wav" data-volume="1"></audio>
+      <audio data-hf-id="hf-v93v" id="voice-04" data-start="14" data-duration="4.118" data-track-index="3" src="voice/voice-04.wav" data-volume="1"></audio>
+      <audio data-hf-id="hf-ajbc" id="voice-05" data-start="19" data-duration="4.182" data-track-index="4" src="voice/voice-05.wav" data-volume="1"></audio>
+      <audio data-hf-id="hf-3s42" id="voice-06" data-start="24" data-duration="3.137" data-track-index="5" src="voice/voice-06.wav" data-volume="1"></audio>
+      <div data-hf-id="hf-zet7" id="scene1" class="scene">
+        <img data-hf-id="hf-hu0c" class="hero-bg" id="hero1-img" src="assets/hero-scene1.png" alt="" data-layout-allow-overflow="">
+        <div data-hf-id="hf-sx2r" class="paper-scrim"></div>
+        <div data-hf-id="hf-btwr" class="scene-content" style="justify-content: center; gap: 34px">
+          <div data-hf-id="hf-sey2" class="brand-row" id="s1-brand"><div data-hf-id="hf-fk1n" class="brand-mark">爪</div><span data-hf-id="hf-on1y">爪味自然</span></div>
+          <p data-hf-id="hf-37kj" class="eyebrow" id="s1-eyebrow">天然肉源 · 猫狗通用 · 小批量烘制</p>
+          <h1 data-hf-id="hf-mqfz" class="headline" id="s1-title">给每一次奖励</h1>
+          <p data-hf-id="hf-ffl4" class="subline" id="s1-sub">这不是普通零食广告，是一套把宠物奖励做成复购生意的品牌演示。</p>
+          <div data-hf-id="hf-ybbi" class="zebra-stamp" id="s1-stamp">配得上的干净配方</div>
+          <div data-hf-id="hf-r8y1" class="chip-row">
+            <div data-hf-id="hf-99hc" class="chip strong s1-chip">猫狗通用</div>
+            <div data-hf-id="hf-ug87" class="chip s1-chip">天然肉源</div>
+            <div data-hf-id="hf-robx" class="chip s1-chip">干净配方</div>
+          </div>
+        </div>
+        <div data-hf-id="hf-mzpc" class="caption" id="cap1" data-layout-allow-overlap="">给每一次奖励，配得上的干净配方。</div>
+      </div>
+
+      <div data-hf-id="hf-qqxc" id="scene2" class="scene">
+        <div data-hf-id="hf-cn5c" class="scene-content">
+          <p data-hf-id="hf-mu3n" class="eyebrow" id="s2-eyebrow">本季精选</p>
+          <h2 data-hf-id="hf-17rh" class="section-title" id="s2-title">按场景挑选天然零食</h2>
+          <p data-hf-id="hf-wn6t" class="section-copy" id="s2-copy">日常奖励、营养加餐、口腔护理和训练互动，一套货盘讲清楚。</p>
+          <div data-hf-id="hf-otfu" class="product-grid">
+            <article data-hf-id="hf-vwft" class="product-card">
+              <div data-hf-id="hf-o1gk" class="product-img-wrap"><img data-hf-id="hf-890b" class="product-img" src="assets/product-chicken-strips.png" alt="" data-layout-allow-overflow=""></div>
+              <div data-hf-id="hf-mjna" class="product-body">
+                <span data-hf-id="hf-3mhj" class="tag">日常奖励</span>
+                <h3 data-hf-id="hf-az1l">慢烘鸡胸肉条</h3>
+                <p data-hf-id="hf-4est">高接受度，适合门店常备和首推。</p>
+                <div data-hf-id="hf-kieg" class="price">¥59</div>
+              </div>
+            </article>
+            <article data-hf-id="hf-0b0t" class="product-card">
+              <div data-hf-id="hf-1kik" class="product-img-wrap"><img data-hf-id="hf-ra7i" class="product-img" src="assets/product-freeze-dried.png" alt="" data-layout-allow-overflow=""></div>
+              <div data-hf-id="hf-lzyy" class="product-body">
+                <span data-hf-id="hf-2387" class="tag">营养加餐</span>
+                <h3 data-hf-id="hf-wrca">冻干双拼肉粒</h3>
+                <p data-hf-id="hf-ttdm">可拌粮，可加餐，挑食家庭更好理解。</p>
+                <div data-hf-id="hf-n40n" class="price">¥76</div>
+              </div>
+            </article>
+            <article data-hf-id="hf-1hxw" class="product-card">
+              <div data-hf-id="hf-0dlh" class="product-img-wrap"><img data-hf-id="hf-7grz" class="product-img" src="assets/product-dental-chews.png" alt="" data-layout-allow-overflow=""></div>
+              <div data-hf-id="hf-me9z" class="product-body">
+                <span data-hf-id="hf-sp5q" class="tag">口腔护理</span>
+                <h3 data-hf-id="hf-gyx5">鼠尾草洁齿棒</h3>
+                <p data-hf-id="hf-8n4x">把餐后护理变成周期性复购。</p>
+                <div data-hf-id="hf-qbf4" class="price">¥68</div>
+              </div>
+            </article>
+            <article data-hf-id="hf-13mv" class="product-card">
+              <div data-hf-id="hf-0rwi" class="product-img-wrap"><img data-hf-id="hf-zyos" class="product-img" src="assets/product-training-bites.png" alt="" data-layout-allow-overflow=""></div>
+              <div data-hf-id="hf-msl0" class="product-body">
+                <span data-hf-id="hf-bly5" class="tag">训练互动</span>
+                <h3 data-hf-id="hf-4ckx">一口训练小方</h3>
+                <p data-hf-id="hf-6eqa">小颗粒、好控量，适合社群活动。</p>
+                <div data-hf-id="hf-rgfp" class="price">¥49</div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div data-hf-id="hf-yiho" class="caption" id="cap2" data-layout-allow-overlap="">从日常奖励，到营养加餐、口腔护理和训练互动，爪味自然把常见喂养场景整理成清晰货盘。</div>
+      </div>
+
+      <div data-hf-id="hf-xolr" id="scene3" class="scene" data-layout-allow-overlap="">
+        <div data-hf-id="hf-o0eg" class="scene-content">
+          <div data-hf-id="hf-adnp" class="standards-layout">
+            <div data-hf-id="hf-yeow">
+              <p data-hf-id="hf-w2qf" class="eyebrow" id="s3-eyebrow">安心标准</p>
+              <h2 data-hf-id="hf-movs" class="section-title" id="s3-title">看得懂的成分表，才配得上长期喂养</h2>
+              <div data-hf-id="hf-8k34" class="standard-list">
+                <div data-hf-id="hf-v4bp" class="standard-item">
+                  <div data-hf-id="hf-rr68" class="standard-number">01</div>
+                  <div data-hf-id="hf-y7yw"><h3 data-hf-id="hf-erec">真实肉源</h3><p data-hf-id="hf-oq9z">鸡胸肉、牛肉、鳕鱼和鸭肉等明确原料。</p></div>
+                </div>
+                <div data-hf-id="hf-s1rt" class="standard-item">
+                  <div data-hf-id="hf-qk95" class="standard-number">02</div>
+                  <div data-hf-id="hf-x11t"><h3 data-hf-id="hf-qj3q">轻加工</h3><p data-hf-id="hf-wlhm">低温烘制与冻干，保留香气和口感。</p></div>
+                </div>
+                <div data-hf-id="hf-t8ow" class="standard-item">
+                  <div data-hf-id="hf-qyk6" class="standard-number">03</div>
+                  <div data-hf-id="hf-xfcu"><h3 data-hf-id="hf-vwkt">场景化选择</h3><p data-hf-id="hf-f6ex">训练、洁齿、挑食、加餐，都有对应选择。</p></div>
+                </div>
+              </div>
+            </div>
+            <div data-hf-id="hf-4ju2" class="photo-panel" id="s3-photo"><img data-hf-id="hf-zxw2" src="assets/hero-scene3.png" alt="" data-layout-allow-overflow=""></div>
+          </div>
+        </div>
+        <div data-hf-id="hf-6dvh" class="caption" id="cap3" data-layout-allow-overlap="">真实肉源、轻加工、看得懂的成分表，让宠物主人更容易理解，也让门店更容易讲清。</div>
+      </div>
+
+      <div data-hf-id="hf-1mps" id="scene4" class="scene" data-layout-allow-overlap="">
+        <div data-hf-id="hf-mthd" class="scene-content">
+          <p data-hf-id="hf-qw6n" class="eyebrow" id="s4-eyebrow">前台链路</p>
+          <h2 data-hf-id="hf-km23" class="section-title" id="s4-title">从种草到下单，演示闭环完整</h2>
+          <p data-hf-id="hf-qdry" class="section-copy" id="s4-copy">筛选、详情、购物车、地址、订单，一条路径讲清消费体验。</p>
+          <div data-hf-id="hf-l8x1" class="flow-wrap">
+            <div data-hf-id="hf-ke2r" class="flow-line" id="s4-line"></div>
+            <div data-hf-id="hf-0g2t" class="flow-node"><div data-hf-id="hf-lll7" class="flow-icon">筛</div><h3 data-hf-id="hf-fciv">分类筛选</h3><p data-hf-id="hf-4n2b">猫狗与食品类型</p></div>
+            <div data-hf-id="hf-abp5" class="flow-node"><div data-hf-id="hf-5fy4" class="flow-icon">详</div><h3 data-hf-id="hf-2b9w">商品详情</h3><p data-hf-id="hf-4hxg">成分、适用和口感</p></div>
+            <div data-hf-id="hf-bim8" class="flow-node"><div data-hf-id="hf-yzd9" class="flow-icon">购</div><h3 data-hf-id="hf-oux1">加入购物车</h3><p data-hf-id="hf-40qm">数量与金额联动</p></div>
+            <div data-hf-id="hf-b4b7" class="flow-node"><div data-hf-id="hf-9sqe" class="flow-icon">址</div><h3 data-hf-id="hf-0cr2">确认地址</h3><p data-hf-id="hf-gopx">登录后保存收货信息</p></div>
+            <div data-hf-id="hf-94s2" class="flow-node"><div data-hf-id="hf-5bol" class="flow-icon">单</div><h3 data-hf-id="hf-x2eq">生成订单</h3><p data-hf-id="hf-jm6c">写入本地订单</p></div>
+          </div>
+        </div>
+        <div data-hf-id="hf-8aka" class="caption" id="cap4" data-layout-allow-overlap="">前台不仅展示商品，还能完成筛选、详情查看、加入购物车和模拟下单。</div>
+      </div>
+
+      <div data-hf-id="hf-kl7j" id="scene5" class="scene">
+        <div data-hf-id="hf-n7se" class="scene-content">
+          <p data-hf-id="hf-uwlq" class="eyebrow" id="s5-eyebrow">经营后台</p>
+          <h2 data-hf-id="hf-k69f" class="section-title" id="s5-title">从产品展示，推进到经营展示</h2>
+          <div data-hf-id="hf-v9ug" class="admin-layout">
+            <div data-hf-id="hf-3t5p" class="metric-grid">
+              <div data-hf-id="hf-swxr" class="metric-card"><span data-hf-id="hf-40vh">营业额</span><strong data-hf-id="hf-lmvk">¥12,860</strong></div>
+              <div data-hf-id="hf-djun" class="metric-card"><span data-hf-id="hf-b53w">订单数</span><strong data-hf-id="hf-ctq8">86</strong></div>
+              <div data-hf-id="hf-d5jm" class="metric-card"><span data-hf-id="hf-86cb">售出件数</span><strong data-hf-id="hf-9ewt">214</strong></div>
+              <div data-hf-id="hf-cr8l" class="metric-card"><span data-hf-id="hf-yhk5">销量冠军</span><strong data-hf-id="hf-kf7e">训练小方</strong></div>
+            </div>
+            <div data-hf-id="hf-jpj0" class="dashboard-panel" data-layout-allow-overflow="">
+              <div data-hf-id="hf-tiv1" class="rank-row"><div data-hf-id="hf-3avo" class="rank-index">1</div><div data-hf-id="hf-llv1">一口训练小方</div><div data-hf-id="hf-23gp" class="bar" style="width: 118px"></div></div>
+              <div data-hf-id="hf-23td" class="rank-row"><div data-hf-id="hf-23yl" class="rank-index">2</div><div data-hf-id="hf-5hqt">慢烘鸡胸肉条</div><div data-hf-id="hf-09ho" class="bar" style="width: 96px"></div></div>
+              <div data-hf-id="hf-3aqg" class="rank-row"><div data-hf-id="hf-2i9m" class="rank-index">3</div><div data-hf-id="hf-b4zq">冻干双拼肉粒</div><div data-hf-id="hf-fyc0" class="bar" style="width: 78px"></div></div>
+              <div data-hf-id="hf-2wff" class="rank-row"><div data-hf-id="hf-4hsr" class="rank-index">4</div><div data-hf-id="hf-4e2d">鼠尾草洁齿棒</div><div data-hf-id="hf-s55r" class="bar" style="width: 64px"></div></div>
+            </div>
+          </div>
+        </div>
+        <div data-hf-id="hf-g16v" class="caption" id="cap5" data-layout-allow-overlap="">后台同步订单、营业额和销量排行，让招商演示从产品展示进入经营展示。</div>
+      </div>
+
+      <div data-hf-id="hf-bxbo" id="scene6" class="scene">
+        <img data-hf-id="hf-8cgy" class="hero-bg" id="hero6-img" src="assets/hero-scene6.png" alt="" data-layout-allow-overflow="">
+        <div data-hf-id="hf-jo43" class="paper-scrim"></div>
+        <div data-hf-id="hf-kyeh" class="scene-content" style="justify-content: center">
+          <div data-hf-id="hf-0kdg" class="closing-panel">
+            <div data-hf-id="hf-lrh9" class="brand-row" id="s6-brand"><div data-hf-id="hf-b1mj" class="brand-mark">爪</div><span data-hf-id="hf-x9ui">爪味自然</span></div>
+            <h2 data-hf-id="hf-q78r" id="s6-title">把天然宠物零食做成可复购的渠道生意</h2>
+            <p data-hf-id="hf-v7ed" id="s6-copy">用产品矩阵、场景话术和数据复盘，完成第一轮合作验证。</p>
+            <div data-hf-id="hf-y5fh" class="chip-row">
+              <div data-hf-id="hf-gzwz" class="chip strong s6-chip">产品矩阵</div>
+              <div data-hf-id="hf-cixr" class="chip s6-chip">场景话术</div>
+              <div data-hf-id="hf-8uaf" class="chip s6-chip">数据复盘</div>
+            </div>
+            <div data-hf-id="hf-sudr" class="brand-footer" id="s6-footer">Paw Natural Treats · 2026</div>
+          </div>
+        </div>
+        <div data-hf-id="hf-dpit" class="caption" id="cap6" data-layout-allow-overlap="">一起把天然宠物零食，做成可复购、可复盘的渠道生意。</div>
+      </div>
+
+      <div data-hf-id="hf-km6e" class="light-leak" id="light-leak"></div>
+      <div data-hf-id="hf-dkpq" class="final-wash" id="final-wash"></div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      var tl = gsap.timeline({ paused: true });
+
+      function enter(selector, vars, t) {
+        tl.fromTo(selector, vars.from, vars.to, t);
+      }
+
+      function showCaption(id, start, end) {
+        tl.set(id, { visibility: "visible", opacity: 0 }, start);
+        tl.fromTo(id, { opacity: 0, y: 24, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 0.28, ease: "back.out(1.4)" }, start + 0.08);
+        tl.to(id, { opacity: 0, scale: 0.96, duration: 0.16, ease: "power2.in" }, end - 0.2);
+        tl.set(id, { opacity: 0, visibility: "hidden" }, end);
+      }
+
+      function blurCrossfade(oldScene, newScene, t, duration) {
+        tl.set(newScene, { opacity: 0, visibility: "visible", filter: "blur(18px)" }, t);
+        tl.to(newScene, { opacity: 1, filter: "blur(0px)", duration: duration, ease: "sine.inOut" }, t);
+        tl.to(oldScene, { opacity: 0, filter: "blur(18px)", duration: duration, ease: "sine.inOut" }, t);
+        tl.set(oldScene, { visibility: "hidden" }, t + duration);
+      }
+
+      tl.fromTo("#hero1-img", { scale: 1 }, { scale: 1.055, duration: 4, ease: "none" }, 0);
+      enter("#s1-brand", { from: { opacity: 0, y: 30 }, to: { opacity: 1, y: 0, duration: 0.42, ease: "power3.out" } }, 0.2);
+      enter("#s1-eyebrow", { from: { opacity: 0, x: -44 }, to: { opacity: 1, x: 0, duration: 0.48, ease: "expo.out" } }, 0.46);
+      enter("#s1-title", { from: { opacity: 0, x: -70, scale: 0.96 }, to: { opacity: 1, x: 0, scale: 1, duration: 0.62, ease: "back.out(1.3)" } }, 0.72);
+      enter("#s1-sub", { from: { opacity: 0, y: 34 }, to: { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" } }, 1.06);
+      enter("#s1-stamp", { from: { opacity: 0, rotation: -5, y: 24 }, to: { opacity: 1, rotation: 0, y: 0, duration: 0.44, ease: "back.out(1.8)" } }, 1.35);
+      enter(".s1-chip", { from: { opacity: 0, y: 26, scale: 0.92 }, to: { opacity: 1, y: 0, scale: 1, duration: 0.36, stagger: 0.09, ease: "power3.out" } }, 1.65);
+      tl.to(".s1-chip", { y: -8, duration: 1.05, yoyo: true, repeat: 2, ease: "sine.inOut" }, 2.05);
+      showCaption("#cap1", 0.18, 3.8);
+      tl.to("#light-leak", { opacity: 1, duration: 0.28, ease: "power2.out" }, 3.45);
+      tl.set("#scene2", { opacity: 1, visibility: "visible", filter: "blur(0px)" }, 3.78);
+      tl.set("#scene1", { opacity: 0, visibility: "hidden" }, 3.95);
+      tl.to("#light-leak", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 3.9);
+
+      enter("#s2-eyebrow", { from: { opacity: 0, y: 28 }, to: { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" } }, 4.12);
+      enter("#s2-title", { from: { opacity: 0, x: -58 }, to: { opacity: 1, x: 0, duration: 0.52, ease: "expo.out" } }, 4.32);
+      enter("#s2-copy", { from: { opacity: 0, y: 30 }, to: { opacity: 1, y: 0, duration: 0.42, ease: "power2.out" } }, 4.58);
+      enter(".product-card", { from: { opacity: 0, y: 80, scale: 0.94 }, to: { opacity: 1, y: 0, scale: 1, duration: 0.52, stagger: 0.13, ease: "back.out(1.25)" } }, 4.82);
+      tl.to(".product-img", { scale: 1.04, duration: 4.1, ease: "none" }, 4.82);
+      tl.to(".price", { color: "#c79b4b", duration: 0.32, yoyo: true, repeat: 1, ease: "power1.inOut", stagger: 0.08 }, 6.4);
+      showCaption("#cap2", 4.1, 8.8);
+      blurCrossfade("#scene2", "#scene3", 8.55, 0.5);
+
+      enter("#s3-eyebrow", { from: { opacity: 0, x: -36 }, to: { opacity: 1, x: 0, duration: 0.38, ease: "power3.out" } }, 9.08);
+      enter("#s3-title", { from: { opacity: 0, y: 46 }, to: { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" } }, 9.24);
+      enter(".standard-item", { from: { opacity: 0, x: -74 }, to: { opacity: 1, x: 0, duration: 0.48, stagger: 0.15, ease: "back.out(1.2)" } }, 9.68);
+      enter("#s3-photo", { from: { opacity: 0, x: 80, scale: 0.96 }, to: { opacity: 1, x: 0, scale: 1, duration: 0.62, ease: "power3.out" } }, 9.82);
+      tl.to("#s3-photo img", { scale: 1.035, duration: 4.2, ease: "none" }, 9.82);
+      tl.to(".standard-number", { color: "#b98558", duration: 0.28, yoyo: true, repeat: 1, stagger: 0.12, ease: "sine.inOut" }, 11.2);
+      showCaption("#cap3", 9.1, 13.8);
+      blurCrossfade("#scene3", "#scene4", 13.55, 0.5);
+
+      enter("#s4-eyebrow", { from: { opacity: 0, y: 28 }, to: { opacity: 1, y: 0, duration: 0.36, ease: "power3.out" } }, 14.08);
+      enter("#s4-title", { from: { opacity: 0, x: -58 }, to: { opacity: 1, x: 0, duration: 0.5, ease: "expo.out" } }, 14.24);
+      enter("#s4-copy", { from: { opacity: 0, y: 30 }, to: { opacity: 1, y: 0, duration: 0.42, ease: "power2.out" } }, 14.5);
+      enter("#s4-line", { from: { opacity: 0, scaleX: 0 }, to: { opacity: 1, scaleX: 1, duration: 0.9, ease: "power3.out" } }, 14.92);
+      enter(".flow-node", { from: { opacity: 0, y: 64, scale: 0.94 }, to: { opacity: 1, y: 0, scale: 1, duration: 0.45, stagger: 0.13, ease: "back.out(1.25)" } }, 15.02);
+      tl.to(".flow-icon", { backgroundColor: "#b98558", duration: 0.22, yoyo: true, repeat: 1, stagger: 0.16, ease: "power1.inOut" }, 16.15);
+      showCaption("#cap4", 14.1, 18.8);
+      blurCrossfade("#scene4", "#scene5", 18.55, 0.5);
+
+      enter("#s5-eyebrow", { from: { opacity: 0, x: -36 }, to: { opacity: 1, x: 0, duration: 0.36, ease: "power3.out" } }, 19.08);
+      enter("#s5-title", { from: { opacity: 0, y: 42 }, to: { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" } }, 19.24);
+      enter(".metric-card", { from: { opacity: 0, y: 58, scale: 0.95 }, to: { opacity: 1, y: 0, scale: 1, duration: 0.46, stagger: 0.1, ease: "back.out(1.25)" } }, 19.62);
+      enter(".dashboard-panel", { from: { opacity: 0, x: 80 }, to: { opacity: 1, x: 0, duration: 0.54, ease: "power3.out" } }, 19.82);
+      enter(".rank-row", { from: { opacity: 0, x: 60 }, to: { opacity: 1, x: 0, duration: 0.34, stagger: 0.1, ease: "power2.out" } }, 20.1);
+      tl.to(".bar", { backgroundColor: "#c79b4b", duration: 0.28, yoyo: true, repeat: 1, stagger: 0.09, ease: "sine.inOut" }, 21.4);
+      tl.to(".metric-card strong", { scale: 1.08, color: "#b98558", duration: 0.28, yoyo: true, repeat: 1, stagger: 0.08, ease: "power1.inOut" }, 20.25);
+      showCaption("#cap5", 19.1, 23.8);
+      blurCrossfade("#scene5", "#scene6", 23.45, 0.6);
+
+      tl.fromTo("#hero6-img", { scale: 1 }, { scale: 1.05, duration: 6, ease: "none" }, 24.0);
+      enter("#s6-brand", { from: { opacity: 0, y: 34 }, to: { opacity: 1, y: 0, duration: 0.42, ease: "power3.out" } }, 24.12);
+      enter("#s6-title", { from: { opacity: 0, y: 58, scale: 0.97 }, to: { opacity: 1, y: 0, scale: 1, duration: 0.62, ease: "expo.out" } }, 24.42);
+      enter("#s6-copy", { from: { opacity: 0, y: 34 }, to: { opacity: 1, y: 0, duration: 0.46, ease: "power2.out" } }, 24.92);
+      enter(".s6-chip", { from: { opacity: 0, y: 34, scale: 0.92 }, to: { opacity: 1, y: 0, scale: 1, duration: 0.42, stagger: 0.12, ease: "back.out(1.3)" } }, 25.32);
+      enter("#s6-footer", { from: { opacity: 0, x: -30 }, to: { opacity: 1, x: 0, duration: 0.42, ease: "power2.out" } }, 26.15);
+      tl.to(".s6-chip", { y: -6, duration: 1.1, yoyo: true, repeat: 2, ease: "sine.inOut" }, 26.1);
+      showCaption("#cap6", 24.1, 30.55);
+      tl.to("#final-wash", { opacity: 0.72, duration: 0.8, ease: "sine.inOut" }, 30.03);
+
+      window.__timelines["paw-natural-promo"] = tl;
+    </script>
+  </body>
+</html>
