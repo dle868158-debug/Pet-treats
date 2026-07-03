@@ -1,15 +1,25 @@
 const { Redis } = require("@upstash/redis");
-const { requiredEnv } = require("./env");
 
 let redisClient = null;
 
+function redisConfig() {
+  const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+  const missing = [];
+  if (!url) missing.push("UPSTASH_REDIS_REST_URL/KV_REST_API_URL");
+  if (!token) missing.push("UPSTASH_REDIS_REST_TOKEN/KV_REST_API_TOKEN");
+  if (missing.length) {
+    const error = new Error(`缺少环境变量：${missing.join(", ")}`);
+    error.code = "PAYMENT_CONFIG_MISSING";
+    error.missing = missing;
+    throw error;
+  }
+  return { url, token };
+}
+
 function redis() {
-  requiredEnv(["UPSTASH_REDIS_REST_URL", "UPSTASH_REDIS_REST_TOKEN"]);
   if (!redisClient) {
-    redisClient = new Redis({
-      url: process.env.UPSTASH_REDIS_REST_URL,
-      token: process.env.UPSTASH_REDIS_REST_TOKEN
-    });
+    redisClient = new Redis(redisConfig());
   }
   return redisClient;
 }
