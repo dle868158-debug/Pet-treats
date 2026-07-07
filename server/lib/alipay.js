@@ -5,6 +5,12 @@ function formatYuan(amountCents) {
   return (Number(amountCents) / 100).toFixed(2);
 }
 
+function formatPrivateKey(raw) {
+  const key = raw.replace(/\\n/g, "\n").trim();
+  if (key.includes("-----BEGIN")) return key;
+  return `-----BEGIN PRIVATE KEY-----\n${key}\n-----END PRIVATE KEY-----`;
+}
+
 function alipaySdk() {
   requiredEnv(["ALIPAY_APP_ID", "ALIPAY_PRIVATE_KEY", "ALIPAY_PUBLIC_KEY"]);
   const gateway = alipayGateway();
@@ -16,7 +22,7 @@ function alipaySdk() {
   }
   return new AlipaySdk({
     appId: process.env.ALIPAY_APP_ID,
-    privateKey: process.env.ALIPAY_PRIVATE_KEY.replace(/\\n/g, "\n"),
+    privateKey: formatPrivateKey(process.env.ALIPAY_PRIVATE_KEY),
     alipayPublicKey: process.env.ALIPAY_PUBLIC_KEY.replace(/\\n/g, "\n"),
     gateway,
     signType: "RSA2",
