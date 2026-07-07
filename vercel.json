@@ -11,7 +11,7 @@
     }
   ],
   "crons": [
-    { "path": "/api/cron", "schedule": "*/5 * * * *" }
+    { "path": "/api/cron", "schedule": "0 3 * * *" }
   ],
   "rewrites": [
     { "source": "/api/orders/close", "destination": "/api/orders?action=close" },
