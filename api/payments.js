@@ -2,6 +2,7 @@ const { createAlipayPayload, queryAlipay } = require("../server/lib/alipay");
 const { createWechatPayload, mapWechatState, queryWechat } = require("../server/lib/wechat");
 const { getBaseUrl, methodNotAllowed, readJson, sendJson } = require("../server/lib/http");
 const { getOrder, markClosed, markPaid, savePayment } = require("../server/lib/orders");
+const { rateLimit } = require("../server/lib/rate-limit");
 
 async function syncAlipayOrder(order) {
   const result = await queryAlipay(order);
@@ -88,14 +89,17 @@ async function handleQuery(req, res, provider) {
 async function handleCreate(req, res, provider) {
   if (req.method !== "POST") return methodNotAllowed(res, ["POST"]);
   try {
-    const { orderId, channel } = await readJson(req);
+    const body = await readJson(req);
+    const { orderId, channel } = body;
     const order = await getOrder(orderId);
     if (!order) return sendJson(res, 404, { ok: false, error: "ORDER_NOT_FOUND" });
     if (order.status === "PAID") return sendJson(res, 409, { ok: false, error: "ORDER_ALREADY_PAID" });
     if (order.status === "CLOSED") return sendJson(res, 409, { ok: false, error: "ORDER_CLOSED" });
+    const wechatChannel = channel === "h5" ? "h5" : channel === "jsapi" ? "jsapi" : "native";
+    const reqWithBody = { ...req, body };
     const payment =
       provider === "wechat"
-        ? await createWechatPayload(order, channel === "h5" ? "h5" : "native", getBaseUrl(req), req)
+        ? await createWechatPayload(order, wechatChannel, getBaseUrl(req), reqWithBody)
         : createAlipayPayload(order, channel === "wap" ? "wap" : "pc", getBaseUrl(req));
     await savePayment(order.id, payment);
     return sendJson(res, 200, { ok: true, order, payment });
@@ -115,7 +119,10 @@ module.exports = async function handler(req, res) {
   const provider = req.query?.provider;
   if (action === "status") return handleStatus(req, res);
   if (!["alipay", "wechat"].includes(provider)) return sendJson(res, 404, { ok: false, error: "PAYMENT_PROVIDER_NOT_FOUND" });
+  if (action === "create") {
+    if (await rateLimit(req, res, { prefix: "pay", limit: 10, windowSec: 60 })) return;
+    return handleCreate(req, res, provider);
+  }
   if (action === "query") return handleQuery(req, res, provider);
-  if (action === "create") return handleCreate(req, res, provider);
   return sendJson(res, 404, { ok: false, error: "PAYMENT_ACTION_NOT_FOUND" });
 };

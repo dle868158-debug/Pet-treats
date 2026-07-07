@@ -2,6 +2,7 @@ const { closeAlipay } = require("../server/lib/alipay");
 const { closeWechat } = require("../server/lib/wechat");
 const { createOrder, getOrder, listOrders, markClosed } = require("../server/lib/orders");
 const { getBearerToken, methodNotAllowed, readJson, sendJson } = require("../server/lib/http");
+const { rateLimit } = require("../server/lib/rate-limit");
 
 function handleError(res, error) {
   const status = error.code === "PAYMENT_CONFIG_MISSING" ? 503 : 400;
@@ -51,6 +52,7 @@ module.exports = async function handler(req, res) {
 
   if (action !== "create") return sendJson(res, 404, { ok: false, error: "ORDER_ACTION_NOT_FOUND" });
   if (req.method !== "POST") return methodNotAllowed(res, ["POST"]);
+  if (await rateLimit(req, res, { prefix: "order", limit: 10, windowSec: 60 })) return;
   try {
     const body = await readJson(req);
     const order = await createOrder({

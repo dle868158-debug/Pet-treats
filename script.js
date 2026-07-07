@@ -98,7 +98,6 @@ const USERS_KEY = "pawNaturalUsers";
 const SESSION_KEY = "pawNaturalSession";
 const GUEST_KEY = "pawNaturalGuest";
 const OPEN_CART_KEY = "pawNaturalOpenCart";
-const PAYMENT_PRODUCT_IDS = new Set(defaultProducts.map((product) => product.id));
 
 function loadStoredProducts() {
   try {
@@ -130,9 +129,28 @@ function getMergedProducts() {
 const products = getMergedProducts();
 const FOOD_FILTERS = [...new Set([...BASE_FOOD_FILTERS, ...products.map((product) => product.category).filter(Boolean)])];
 
+async function loadProductsFromApi() {
+  try {
+    const result = await apiFetch("/api/products");
+    if (result.ok && Array.isArray(result.products) && result.products.length > 0) {
+      products.length = 0;
+      result.products.forEach((product) => products.push(normalizeProduct(product)));
+      // Refresh food filters with new categories
+      const newCategories = products.map((p) => p.category).filter(Boolean);
+      FOOD_FILTERS.length = 0;
+      [...new Set([...BASE_FOOD_FILTERS, ...newCategories])].forEach((f) => FOOD_FILTERS.push(f));
+      renderFoodFilters();
+      renderProducts();
+      renderHotSales();
+    }
+  } catch {
+    // Fallback to local defaultProducts — already loaded.
+  }
+}
+
 const checkoutProvider = {
   async createCheckout(cartItems, customer, address) {
-    const response = await fetch("/api/orders", {
+    const result = await apiFetch("/api/orders", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -143,8 +161,7 @@ const checkoutProvider = {
         address
       })
     });
-    const result = await response.json().catch(() => ({}));
-    if (!response.ok || !result.ok) {
+    if (!result.ok) {
       throw new Error(result.message || "订单创建失败，请稍后再试。");
     }
     return {
@@ -191,6 +208,31 @@ let currentPaymentOrder = null;
 let currentPaymentProvider = "alipay";
 let currentPaymentPayload = null;
 let paymentPollTimer = null;
+let paymentPollTimeout = null;
+let isCheckoutSubmitting = false;
+
+async function apiFetch(url, options = {}) {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 15000);
+  try {
+    const response = await fetch(url, { ...options, signal: controller.signal });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error(result.message || `请求失败 (${response.status})`);
+    }
+    return result;
+  } catch (error) {
+    if (error.name === "AbortError") {
+      throw new Error("请求超时，请检查网络后重试");
+    }
+    if (error instanceof TypeError) {
+      throw new Error("网络连接失败，请检查网络后重试");
+    }
+    throw error;
+  } finally {
+    window.clearTimeout(timeout);
+  }
+}
 
 function formatCurrency(value) {
   return new Intl.NumberFormat("zh-CN", {
@@ -202,6 +244,16 @@ function formatCurrency(value) {
 
 function formatSales(value) {
   return new Intl.NumberFormat("zh-CN").format(value);
+}
+
+function escapeHtml(str) {
+  if (typeof str !== "string") return str;
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 function getPetLabel(product) {
@@ -336,19 +388,6 @@ function getCartTotal() {
   }, 0);
 }
 
-function getUnsupportedPaymentProducts() {
-  return state.cart
-    .map((item) => getProduct(item.productId))
-    .filter((product) => product && !PAYMENT_PRODUCT_IDS.has(product.id));
-}
-
-function showUnsupportedPaymentMessage() {
-  const names = getUnsupportedPaymentProducts().map((product) => product.name);
-  if (!names.length) return false;
-  showToast(`该商品暂未上架到真实支付系统，请联系管理员：${names.join("、")}`);
-  return true;
-}
-
 function getAddresses() {
   return state.currentUser?.addresses || [];
 }
@@ -358,14 +397,18 @@ function getDefaultAddress() {
 }
 
 function formatAddressLine(address) {
-  return `${address.receiver} · ${address.phone} · ${address.region} ${address.detail}`;
+  return `${escapeHtml(address.receiver)} · ${escapeHtml(address.phone)} · ${escapeHtml(address.region)} ${escapeHtml(address.detail)}`;
 }
 
-function showToast(message) {
+function showToast(message, type = "info") {
   toast.textContent = message;
-  toast.classList.add("is-visible");
+  toast.className = "toast is-visible";
+  if (type === "error") toast.classList.add("toast--error");
+  if (type === "success") toast.classList.add("toast--success");
   window.clearTimeout(showToast.timer);
-  showToast.timer = window.setTimeout(() => toast.classList.remove("is-visible"), 2400);
+  showToast.timer = window.setTimeout(() => {
+    toast.classList.remove("is-visible");
+  }, type === "error" ? 4000 : 2400);
 }
 
 function renderHotSales() {
@@ -379,12 +422,12 @@ function renderHotSales() {
         <li class="hot-item">
           <span class="rank-badge">TOP ${index + 1}</span>
           <div class="hot-copy">
-            <button class="hot-title" type="button" data-detail="${product.id}">${product.name}</button>
-            <span>${product.category} · ${formatSales(product.sales)} 件已售</span>
+            <button class="hot-title" type="button" data-detail="${escapeHtml(product.id)}">${escapeHtml(product.name)}</button>
+            <span>${escapeHtml(product.category)} · ${formatSales(product.sales)} 件已售</span>
           </div>
           <div class="hot-action">
             <strong>${formatCurrency(product.price)}</strong>
-            <button class="mini-button" type="button" data-add="${product.id}">加入</button>
+            <button class="mini-button" type="button" data-add="${escapeHtml(product.id)}">加入</button>
           </div>
         </li>
       `
@@ -444,23 +487,23 @@ function renderProducts() {
     .map(
       (product) => `
         <article class="product-card">
-          <img src="${product.image}" alt="${product.name}" loading="lazy">
+          <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" loading="lazy">
           <div class="product-content">
             <div class="product-meta">
               <span class="tag pet-tag">${getPetLabel(product)}</span>
-              ${product.tags.filter((tag) => tag !== getPetLabel(product)).map((tag) => `<span class="tag">${tag}</span>`).join("")}
+              ${product.tags.filter((tag) => tag !== getPetLabel(product)).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}
             </div>
             <div class="product-title">
               <div class="product-name">
-                <h3>${product.name}</h3>
+                <h3>${escapeHtml(product.name)}</h3>
                 <span class="sales-count">已售 ${formatSales(product.sales)} 件</span>
               </div>
               <span class="price">${formatCurrency(product.price)}</span>
             </div>
-            <p class="product-desc">${product.description}</p>
+            <p class="product-desc">${escapeHtml(product.description)}</p>
             <div class="card-actions">
-              <button class="plain-button" type="button" data-detail="${product.id}">查看详情</button>
-              <button class="primary-button" type="button" data-add="${product.id}">加入购物车</button>
+              <button class="plain-button" type="button" data-detail="${escapeHtml(product.id)}">查看详情</button>
+              <button class="primary-button" type="button" data-add="${escapeHtml(product.id)}">加入购物车</button>
             </div>
           </div>
         </article>
@@ -490,17 +533,17 @@ function renderCart() {
       if (!product) return "";
       return `
         <article class="cart-item">
-          <img src="${product.image}" alt="${product.name}">
+          <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}">
           <div>
-            <h3>${product.name}</h3>
-            <div>${product.weight} · ${formatCurrency(product.price)}</div>
+            <h3>${escapeHtml(product.name)}</h3>
+            <div>${escapeHtml(product.weight)} · ${formatCurrency(product.price)}</div>
             <div class="quantity-row">
-              <div class="quantity-control" aria-label="${product.name} 数量">
-                <button type="button" data-decrease="${product.id}" aria-label="减少数量">−</button>
+              <div class="quantity-control" aria-label="${escapeHtml(product.name)} 数量">
+                <button type="button" data-decrease="${escapeHtml(product.id)}" aria-label="减少数量">−</button>
                 <span>${item.quantity}</span>
-                <button type="button" data-increase="${product.id}" aria-label="增加数量">+</button>
+                <button type="button" data-increase="${escapeHtml(product.id)}" aria-label="增加数量">+</button>
               </div>
-              <button class="remove-button" type="button" data-remove="${product.id}">删除</button>
+              <button class="remove-button" type="button" data-remove="${escapeHtml(product.id)}">删除</button>
             </div>
           </div>
         </article>
@@ -535,7 +578,7 @@ function renderCheckoutAccount() {
   }
 
   checkoutAccountNode.innerHTML = `
-    <strong>${state.currentUser.name}</strong>
+    <strong>${escapeHtml(state.currentUser.name)}</strong>
     <span>购买前会确认收货地址。</span>
     <button class="inline-action" type="button" data-open-account>管理地址</button>
   `;
@@ -546,8 +589,8 @@ function renderAccountModal() {
   const addresses = getAddresses();
 
   accountSummary.innerHTML = `
-    <strong>${state.currentUser.name}</strong>
-    <span>${state.currentUser.email}</span>
+    <strong>${escapeHtml(state.currentUser.name)}</strong>
+    <span>${escapeHtml(state.currentUser.email)}</span>
     <button class="plain-button" type="button" data-logout>退出登录</button>
   `;
 
@@ -558,16 +601,16 @@ function renderAccountModal() {
             <article class="address-card">
               <div>
                 <div class="address-title">
-                  <strong>${address.receiver}</strong>
+                  <strong>${escapeHtml(address.receiver)}</strong>
                   ${address.isDefault ? '<span class="default-badge">默认</span>' : ""}
                 </div>
-                <p>${address.phone}</p>
-                <p>${address.region} ${address.detail}</p>
-                ${address.note ? `<p>${address.note}</p>` : ""}
+                <p>${escapeHtml(address.phone)}</p>
+                <p>${escapeHtml(address.region)} ${escapeHtml(address.detail)}</p>
+                ${address.note ? `<p>${escapeHtml(address.note)}</p>` : ""}
               </div>
               <div class="address-actions">
-                <button class="plain-button" type="button" data-set-default="${address.id}">设为默认</button>
-                <button class="remove-button" type="button" data-delete-address="${address.id}">删除</button>
+                <button class="plain-button" type="button" data-set-default="${escapeHtml(address.id)}">设为默认</button>
+                <button class="remove-button" type="button" data-delete-address="${escapeHtml(address.id)}">删除</button>
               </div>
             </article>
           `
@@ -623,7 +666,7 @@ function getMissingAddressFields(address) {
 function addAddress(address) {
   const missingFields = getMissingAddressFields(address);
   if (missingFields.length) {
-    showToast(`请填写${missingFields.join("、")}`);
+    showToast(`请填写${missingFields.join("、")}`, "error");
     return null;
   }
 
@@ -640,7 +683,7 @@ function addAddress(address) {
   renderAccountModal();
   renderCheckoutAccount();
   renderCheckoutModal();
-  showToast("地址已保存");
+  showToast("地址已保存", "success");
   return nextAddress;
 }
 
@@ -683,7 +726,7 @@ function addToCart(productId) {
   }
   saveCart();
   renderCart();
-  showToast("已加入购物车");
+  showToast("已加入购物车", "success");
 }
 
 function updateQuantity(productId, delta) {
@@ -720,20 +763,20 @@ function openProductModal(productId) {
 
   modalBody.innerHTML = `
     <div class="modal-layout">
-      <img src="${product.image}" alt="${product.name}">
+      <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}">
       <div class="modal-copy">
         <div>
-          <p class="eyebrow">${getPetLabel(product)} · ${product.category} · ${product.weight}</p>
-          <h2 id="modal-title">${product.name}</h2>
+          <p class="eyebrow">${getPetLabel(product)} · ${escapeHtml(product.category)} · ${escapeHtml(product.weight)}</p>
+          <h2 id="modal-title">${escapeHtml(product.name)}</h2>
           <p class="modal-sales">已售 ${formatSales(product.sales)} 件</p>
         </div>
-        <p>${product.description}</p>
+        <p>${escapeHtml(product.description)}</p>
         <ul class="detail-list">
-          <li><strong>主要成分</strong>${product.ingredients}</li>
-          <li><strong>适用建议</strong>${product.suitability}</li>
-          <li><strong>适口性</strong>${product.palatability}</li>
+          <li><strong>主要成分</strong>${escapeHtml(product.ingredients)}</li>
+          <li><strong>适用建议</strong>${escapeHtml(product.suitability)}</li>
+          <li><strong>适口性</strong>${escapeHtml(product.palatability)}</li>
         </ul>
-        <button class="primary-button full-width" type="button" data-add="${product.id}">加入购物车 · ${formatCurrency(product.price)}</button>
+        <button class="primary-button full-width" type="button" data-add="${escapeHtml(product.id)}">加入购物车 · ${formatCurrency(product.price)}</button>
       </div>
     </div>
   `;
@@ -781,20 +824,20 @@ function renderCheckoutModal() {
         .map(
           (address) => `
             <label class="checkout-address-option ${address.id === selectedCheckoutAddressId ? "is-selected" : ""}">
-              <input type="radio" name="checkoutAddress" value="${address.id}" ${address.id === selectedCheckoutAddressId ? "checked" : ""} data-select-checkout-address>
+              <input type="radio" name="checkoutAddress" value="${escapeHtml(address.id)}" ${address.id === selectedCheckoutAddressId ? "checked" : ""} data-select-checkout-address>
               <span>
-                <strong>${address.receiver}</strong>
+                <strong>${escapeHtml(address.receiver)}</strong>
                 ${address.isDefault ? '<em class="default-badge">默认地址</em>' : ""}
-                <small>${address.phone}</small>
-                <small>${address.region} ${address.detail}</small>
-                ${address.note ? `<small>${address.note}</small>` : ""}
+                <small>${escapeHtml(address.phone)}</small>
+                <small>${escapeHtml(address.region)} ${escapeHtml(address.detail)}</small>
+                ${address.note ? `<small>${escapeHtml(address.note)}</small>` : ""}
               </span>
             </label>
           `
         )
         .join("")}
     </div>
-    <button class="plain-button full-width" type="button" data-default-checkout-address="${selectedCheckoutAddressId}">
+    <button class="plain-button full-width" type="button" data-default-checkout-address="${escapeHtml(selectedCheckoutAddressId)}">
       设为默认地址
     </button>
   `;
@@ -817,8 +860,23 @@ function isMobileClient() {
   return /Android|iPhone|iPad|iPod|Mobile/i.test(window.navigator.userAgent);
 }
 
+function isWechatBrowser() {
+  return /MicroMessenger/i.test(window.navigator.userAgent);
+}
+
+function getWechatOpenid() {
+  return sessionStorage.getItem("pawNaturalWechatOpenid") || null;
+}
+
+function setWechatOpenid(openid) {
+  sessionStorage.setItem("pawNaturalWechatOpenid", openid);
+}
+
 function getPaymentChannel(provider) {
-  if (provider === "wechat") return isMobileClient() ? "h5" : "native";
+  if (provider === "wechat") {
+    if (isWechatBrowser()) return "jsapi";
+    return isMobileClient() ? "h5" : "native";
+  }
   return isMobileClient() ? "wap" : "pc";
 }
 
@@ -826,6 +884,10 @@ function stopPaymentPolling() {
   if (paymentPollTimer) {
     window.clearInterval(paymentPollTimer);
     paymentPollTimer = null;
+  }
+  if (paymentPollTimeout) {
+    window.clearTimeout(paymentPollTimeout);
+    paymentPollTimeout = null;
   }
 }
 
@@ -840,7 +902,7 @@ function renderPaymentTabs() {
 
 function renderPaymentPayload(payment) {
   if (!payment) {
-    return '<div class="payment-box">正在创建支付请求...</div>';
+    return `<div class="payment-box"><span class="spinner spinner--large"></span><p>正在创建支付请求...</p></div>`;
   }
 
   if (payment.type === "html") {
@@ -873,27 +935,66 @@ function renderPaymentPayload(payment) {
   return '<div class="payment-box">支付请求已创建，请按页面提示完成付款。</div>';
 }
 
+let paymentCountdownTimer = null;
+
+function stopPaymentCountdown() {
+  if (paymentCountdownTimer) {
+    window.clearInterval(paymentCountdownTimer);
+    paymentCountdownTimer = null;
+  }
+}
+
+function formatCountdown(ms) {
+  if (ms <= 0) return "已超时";
+  const minutes = Math.floor(ms / 60000);
+  const seconds = Math.floor((ms % 60000) / 1000);
+  return `${minutes}:${String(seconds).padStart(2, "0")}`;
+}
+
+function startPaymentCountdown() {
+  stopPaymentCountdown();
+  if (!currentPaymentOrder?.expiresAt) return;
+  const expiresAt = new Date(currentPaymentOrder.expiresAt).getTime();
+  const countdownEl = document.querySelector("[data-payment-countdown]");
+  if (!countdownEl) return;
+  paymentCountdownTimer = window.setInterval(() => {
+    const remaining = expiresAt - Date.now();
+    const el = document.querySelector("[data-payment-countdown]");
+    if (el) el.textContent = `剩余 ${formatCountdown(remaining)}`;
+    if (remaining <= 0) stopPaymentCountdown();
+  }, 1000);
+}
+
 function renderPaymentModal(statusText = "等待支付") {
   if (!currentPaymentOrder) return;
+  const isPending = paymentPollTimer !== null;
+  const expiresAt = currentPaymentOrder.expiresAt ? new Date(currentPaymentOrder.expiresAt).getTime() : 0;
+  const remaining = expiresAt ? expiresAt - Date.now() : 0;
   paymentSummary.innerHTML = `
-    <strong>订单 ${currentPaymentOrder.id}</strong>
-    <span>${formatCurrency(Number(currentPaymentOrder.total) || 0)} · ${statusText}</span>
+    <div>
+      <strong>订单 ${escapeHtml(currentPaymentOrder.id)}</strong>
+      ${remaining > 0 ? `<span class="payment-countdown" data-payment-countdown>剩余 ${formatCountdown(remaining)}</span>` : ""}
+    </div>
+    <span class="payment-amount">${formatCurrency(Number(currentPaymentOrder.total) || 0)}</span>
   `;
   paymentBody.innerHTML = `
     ${renderPaymentTabs()}
     ${renderPaymentPayload(currentPaymentPayload)}
     <div class="payment-status">
-      <span>${statusText}</span>
+      ${isPending ? '<div class="pulse-indicator"><span></span><span></span><span></span></div>' : ""}
+      <span>${escapeHtml(statusText)}</span>
       <button class="plain-button" type="button" data-refresh-payment>重新生成支付</button>
     </div>
+    <button class="plain-button full-width" type="button" data-cancel-payment>取消支付</button>
   `;
+  if (isPending) startPaymentCountdown();
 }
 
 function openAlipayWindow() {
   if (!currentPaymentPayload?.formHtml) return;
   const paymentWindow = window.open("", "_blank", "noopener,noreferrer");
   if (!paymentWindow) {
-    showToast("浏览器拦截了支付窗口，请允许弹窗后重试。");
+    showToast("浏览器拦截了支付窗口，请允许弹窗后重试。", "error");
     return;
   }
   paymentWindow.document.open();
@@ -902,9 +1003,13 @@ function openAlipayWindow() {
 }
 
 async function pollPaymentStatus(orderId) {
-  const response = await fetch(`/api/payments/status?orderId=${encodeURIComponent(orderId)}`);
-  const result = await response.json().catch(() => ({}));
-  if (!response.ok || !result.ok) return;
+  let result;
+  try {
+    result = await apiFetch(`/api/payments/status?orderId=${encodeURIComponent(orderId)}`);
+  } catch {
+    return; // Transient poll failure — silent retry on next interval.
+  }
+  if (!result.ok) return;
 
   const status = result.order?.status || "PENDING_PAYMENT";
   if (status === "PAID") {
@@ -913,7 +1018,7 @@ async function pollPaymentStatus(orderId) {
     saveCart();
     renderCart();
     renderPaymentModal(`支付成功 · ${result.order.platformTradeNo || "已确认"}`);
-    showToast(`订单 ${orderId} 支付成功`);
+    showToast(`订单 ${orderId} 支付成功`, "success");
     return;
   }
 
@@ -929,6 +1034,11 @@ function startPaymentPolling(orderId) {
     pollPaymentStatus(orderId);
   }, 3000);
   pollPaymentStatus(orderId);
+  paymentPollTimeout = window.setTimeout(() => {
+    stopPaymentPolling();
+    renderPaymentModal("支付超时，请重新下单");
+    showToast("支付超时，请重新发起支付", "error");
+  }, 5 * 60 * 1000);
 }
 
 async function requestPayment(provider = currentPaymentProvider) {
@@ -937,22 +1047,43 @@ async function requestPayment(provider = currentPaymentProvider) {
   currentPaymentPayload = null;
   renderPaymentModal("正在创建支付请求");
 
+  // WeChat JSAPI: need openid first
+  if (provider === "wechat" && isWechatBrowser() && !getWechatOpenid()) {
+    // Redirect to OAuth — will come back with openid in hash
+    sessionStorage.setItem("pawNaturalPendingOrder", JSON.stringify(currentPaymentOrder));
+    window.location.href = "/api/wechat-oauth";
+    return;
+  }
+
+  const channel = getPaymentChannel(provider);
+  const bodyPayload = {
+    orderId: currentPaymentOrder.id,
+    channel
+  };
+  if (channel === "jsapi") {
+    bodyPayload.openid = getWechatOpenid();
+  }
+
   try {
-    const response = await fetch(`/api/payments/${provider}`, {
+    const result = await apiFetch(`/api/payments/${provider}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        orderId: currentPaymentOrder.id,
-        channel: getPaymentChannel(provider)
-      })
+      body: JSON.stringify(bodyPayload)
     });
-    const result = await response.json().catch(() => ({}));
-    if (!response.ok || !result.ok) {
+    if (!result.ok) {
       throw new Error(result.message || "支付请求创建失败，请稍后再试。");
     }
     currentPaymentPayload = result.payment;
+
+    // JSAPI: invoke WeixinJSBridge directly
+    if (currentPaymentPayload?.type === "jsapi") {
+      renderPaymentModal("正在调起微信支付");
+      invokeWechatJsapi(currentPaymentPayload);
+      return;
+    }
+
     renderPaymentModal("等待支付");
     if (currentPaymentPayload?.type === "html") openAlipayWindow();
     if (currentPaymentPayload?.type === "redirect" && isMobileClient()) {
@@ -960,7 +1091,38 @@ async function requestPayment(provider = currentPaymentProvider) {
     }
   } catch (error) {
     renderPaymentModal(error.message);
-    showToast(error.message);
+    showToast(error.message, "error");
+  }
+}
+
+function invokeWechatJsapi(payment) {
+  function onBridgeReady() {
+    /* global WeixinJSBridge */
+    WeixinJSBridge.invoke("getBrandWCPayRequest", {
+      appId: payment.appId,
+      timeStamp: payment.timeStamp,
+      nonceStr: payment.nonceStr,
+      package: payment.package,
+      signType: payment.signType,
+      paySign: payment.paySign
+    }, function(res) {
+      if (res.err_msg === "get_brand_wcpay_request:ok") {
+        renderPaymentModal("支付成功");
+        showToast("微信支付成功", "success");
+      } else if (res.err_msg === "get_brand_wcpay_request:cancel") {
+        renderPaymentModal("已取消支付");
+        showToast("已取消微信支付");
+      } else {
+        renderPaymentModal("支付失败，请重试");
+        showToast("微信支付失败", "error");
+      }
+    });
+  }
+
+  if (typeof WeixinJSBridge !== "undefined") {
+    onBridgeReady();
+  } else {
+    document.addEventListener("WeixinJSBridgeReady", onBridgeReady, false);
   }
 }
 
@@ -977,18 +1139,41 @@ function openPaymentModal(order) {
 
 function closePaymentModal() {
   stopPaymentPolling();
+  stopPaymentCountdown();
   paymentModal.classList.remove("is-open");
   paymentModal.setAttribute("aria-hidden", "true");
 }
 
+async function cancelPayment() {
+  if (!currentPaymentOrder) return;
+  try {
+    await apiFetch("/api/orders/close", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ orderId: currentPaymentOrder.id })
+    });
+    showToast("支付已取消", "info");
+  } catch {
+    // Best-effort — close the modal regardless.
+  }
+  closePaymentModal();
+}
+
 async function confirmCheckout() {
-  if (showUnsupportedPaymentMessage()) return;
+  if (isCheckoutSubmitting) return;
 
   const selectedAddress = getSelectedCheckoutAddress();
   if (!selectedAddress) {
-    showToast("请先新增或选择收货地址");
+    showToast("请先新增或选择收货地址", "error");
     setCheckoutAddressFormVisible(true);
     return;
+  }
+
+  const confirmBtn = document.querySelector("[data-confirm-checkout]");
+  isCheckoutSubmitting = true;
+  if (confirmBtn) {
+    confirmBtn.disabled = true;
+    confirmBtn.innerHTML = '<span class="spinner"></span>提交中...';
   }
 
   try {
@@ -997,10 +1182,16 @@ async function confirmCheckout() {
       closeCheckoutModal();
       closeCart();
       openPaymentModal(result);
-      showToast(`订单 ${result.orderId} 已创建，请完成支付`);
+      showToast(`订单 ${result.orderId} 已创建，请完成支付`, "success");
     }
   } catch (error) {
-    showToast(error.message || "订单创建失败，请稍后再试。");
+    showToast(error.message || "订单创建失败，请稍后再试。", "error");
+  } finally {
+    isCheckoutSubmitting = false;
+    if (confirmBtn) {
+      confirmBtn.disabled = false;
+      confirmBtn.textContent = "确定购买";
+    }
   }
 }
 
@@ -1009,8 +1200,6 @@ function checkout() {
     showToast("购物车为空，先选择一款零食吧");
     return;
   }
-
-  if (showUnsupportedPaymentMessage()) return;
 
   if (!state.currentUser) {
     localStorage.setItem(OPEN_CART_KEY, "true");
@@ -1054,6 +1243,7 @@ document.addEventListener("click", (event) => {
   if (target.matches("[data-close-account]")) closeAccountModal();
   if (target.matches("[data-close-checkout]")) closeCheckoutModal();
   if (target.matches("[data-close-payment]")) closePaymentModal();
+  if (target.matches("[data-cancel-payment]")) cancelPayment();
   if (target.matches("[data-open-alipay]")) openAlipayWindow();
   if (target.matches("[data-refresh-payment]")) requestPayment(currentPaymentProvider);
   if (paymentProvider) {
@@ -1121,6 +1311,23 @@ paymentModal.addEventListener("click", (event) => {
   if (event.target === paymentModal) closePaymentModal();
 });
 
+const navToggle = document.querySelector("[data-nav-toggle]");
+const mainNav = document.querySelector(".main-nav");
+if (navToggle && mainNav) {
+  navToggle.addEventListener("click", () => {
+    const isOpen = mainNav.classList.toggle("is-open");
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+    navToggle.textContent = isOpen ? "✕" : "☰";
+  });
+  mainNav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      mainNav.classList.remove("is-open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.textContent = "☰";
+    });
+  });
+}
+
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     closeCart();
@@ -1136,6 +1343,28 @@ renderProducts();
 renderHotSales();
 renderAccountState();
 renderCart();
+loadProductsFromApi();
+
+// Check for WeChat OAuth openid return
+(function checkWechatOAuthReturn() {
+  const hash = window.location.hash;
+  const match = hash.match(/wechat_openid=([^&]+)/);
+  if (match) {
+    setWechatOpenid(match[1]);
+    window.location.hash = "";
+    // Resume pending payment if exists
+    try {
+      const pendingOrder = JSON.parse(sessionStorage.getItem("pawNaturalPendingOrder"));
+      sessionStorage.removeItem("pawNaturalPendingOrder");
+      if (pendingOrder?.id) {
+        openPaymentModal(pendingOrder);
+        requestPayment("wechat");
+      }
+    } catch {
+      // No pending order, that's fine.
+    }
+  }
+})();
 
 if (localStorage.getItem(OPEN_CART_KEY) === "true") {
   localStorage.removeItem(OPEN_CART_KEY);

@@ -30,7 +30,7 @@ function validateAddress(address) {
 }
 
 async function createOrder({ cartItems, customer, address }) {
-  const calculated = calculateItems(cartItems);
+  const calculated = await calculateItems(cartItems);
   const normalizedAddress = normalizeAddress(address);
   if (!validateAddress(normalizedAddress)) {
     const error = new Error("收货地址不完整");

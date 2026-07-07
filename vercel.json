@@ -1,4 +1,18 @@
 {
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=()" }
+      ]
+    }
+  ],
+  "crons": [
+    { "path": "/api/cron", "schedule": "*/5 * * * *" }
+  ],
   "rewrites": [
     { "source": "/api/orders/close", "destination": "/api/orders?action=close" },
     { "source": "/api/orders/list", "destination": "/api/orders?action=list" },
@@ -8,6 +22,12 @@
     { "source": "/api/payments/alipay", "destination": "/api/payments?provider=alipay&action=create" },
     { "source": "/api/payments/wechat", "destination": "/api/payments?provider=wechat&action=create" },
     { "source": "/api/webhooks/alipay", "destination": "/api/webhooks?provider=alipay" },
-    { "source": "/api/webhooks/wechat", "destination": "/api/webhooks?provider=wechat" }
+    { "source": "/api/webhooks/wechat", "destination": "/api/webhooks?provider=wechat" },
+    { "source": "/api/wechat-oauth/callback", "destination": "/api/wechat-oauth?action=callback" },
+    { "source": "/api/wechat-oauth", "destination": "/api/wechat-oauth?action=authorize" },
+    { "source": "/api/products/create", "destination": "/api/products?action=create" },
+    { "source": "/api/products/update", "destination": "/api/products?action=update" },
+    { "source": "/api/products/delete", "destination": "/api/products?action=delete" },
+    { "source": "/api/products", "destination": "/api/products?action=list" }
   ]
 }

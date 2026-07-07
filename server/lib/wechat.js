@@ -64,9 +64,15 @@ async function wechatFetch(method, urlPath, bodyObject) {
 
 async function createWechatPayload(order, channel, baseUrl, req) {
   const isH5 = channel === "h5";
-  const urlPath = isH5 ? "/v3/pay/transactions/h5" : "/v3/pay/transactions/native";
+  const isJsapi = channel === "jsapi";
+
+  let urlPath;
+  if (isJsapi) urlPath = "/v3/pay/transactions/jsapi";
+  else if (isH5) urlPath = "/v3/pay/transactions/h5";
+  else urlPath = "/v3/pay/transactions/native";
+
   const body = {
-    appid: process.env.WECHAT_APP_ID,
+    appid: isJsapi ? (process.env.WECHAT_MP_APP_ID || process.env.WECHAT_APP_ID) : process.env.WECHAT_APP_ID,
     mchid: process.env.WECHAT_MCH_ID,
     description: `爪味自然订单 ${order.id}`,
     out_trade_no: order.id,
@@ -76,6 +82,17 @@ async function createWechatPayload(order, channel, baseUrl, req) {
       currency: "CNY"
     }
   };
+
+  if (isJsapi) {
+    const openid = req.body?.openid || req.query?.openid;
+    if (!openid) {
+      const error = new Error("JSAPI 支付需要用户 openid");
+      error.code = "MISSING_OPENID";
+      throw error;
+    }
+    body.payer = { openid };
+  }
+
   if (isH5) {
     body.scene_info = {
       payer_client_ip: getClientIp(req),
@@ -83,6 +100,29 @@ async function createWechatPayload(order, channel, baseUrl, req) {
     };
   }
   const data = await wechatFetch("POST", urlPath, body);
+
+  if (isJsapi) {
+    // Return parameters for WeixinJSBridge.invoke('getBrandWCPayRequest', ...)
+    const appId = process.env.WECHAT_MP_APP_ID || process.env.WECHAT_APP_ID;
+    const timeStamp = Math.floor(Date.now() / 1000).toString();
+    const nonceStr = nonce();
+    const packageStr = `prepay_id=${data.prepay_id}`;
+    const message = `${appId}\n${timeStamp}\n${nonceStr}\n${packageStr}\n`;
+    const paySign = crypto.createSign("RSA-SHA256").update(message).sign(privateKey(), "base64");
+    return {
+      provider: "wechat",
+      channel: "jsapi",
+      type: "jsapi",
+      mode: "jsapi",
+      appId,
+      timeStamp,
+      nonceStr,
+      package: packageStr,
+      signType: "RSA",
+      paySign
+    };
+  }
+
   if (isH5) {
     return {
       provider: "wechat",
